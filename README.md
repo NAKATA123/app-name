@@ -65,3 +65,6 @@ MVPリリース時
 　Ransack（検索）
 　Kaminari（ページネーション）
 
+### 画面遷移図
+
+https://www.figma.com/design/YThYFlkKIxQ2Xy4oi0fgMs/%E7%84%A1%E9%A1%8C?node-id=0-1&t=txrvOt2LPs3h2mat-1
