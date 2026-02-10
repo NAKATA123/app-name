@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'customers/index'
+  get 'customers/new'
+  get 'customers/create'
   get 'home/top'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -12,4 +15,5 @@ Rails.application.routes.draw do
   get    "login",  to: "sessions#new"
   post   "login",  to: "sessions#create"
   delete "logout", to: "sessions#destroy"
+  resources :customers, only: [:index, :new, :create]
 end

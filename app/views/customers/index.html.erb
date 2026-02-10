@@ -1,0 +1,21 @@
+<h1>顧客一覧</h1>
+
+<p>
+  <%= link_to "顧客を登録する", new_customer_path %>
+</p>
+
+<table border="1" cellpadding="8">
+  <tr>
+    <th>名前</th>
+    <th>電話番号</th>
+    <th>メール</th>
+  </tr>
+
+  <% @customers.each do |customer| %>
+    <tr>
+      <td><%= customer.name %></td>
+      <td><%= customer.phone %></td>
+      <td><%= customer.email %></td>
+    </tr>
+  <% end %>
+</table>
