@@ -1,0 +1,9 @@
+<h1>修理詳細</h1>
+
+<p>顧客名: <%= @repair.car.customer.name %></p>
+<p>車両: <%= @repair.car.car_model %>（<%= @repair.car.car_number %>）</p>
+
+<p>修理内容</p>
+<p><%= @repair.description %></p>
+
+<p>ステータス: <%= @repair.status %></p>

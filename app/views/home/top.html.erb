@@ -4,8 +4,9 @@
 
     <% if logged_in? %>
       <nav style="display:flex; gap:12px;">
-        <%= link_to "修理", "#",
-            style: "color:#000; text-decoration:none;" %>
+       <%= link_to "修理", repairs_path,
+         style: "color:#000; text-decoration:none;" %>
+
 
         <%= link_to "顧客", customers_path,
             style: "color:#000; text-decoration:none;" %>

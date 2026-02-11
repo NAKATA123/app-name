@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'repairs/show'
   get 'customers/index'
   get 'customers/new'
   get 'customers/create'
@@ -16,4 +17,8 @@ Rails.application.routes.draw do
   post   "login",  to: "sessions#create"
   delete "logout", to: "sessions#destroy"
   resources :customers, only: [:index, :new, :create]
+  resources :cars do
+    resources :repairs, shallow: true
+  end
+  resources :repairs, only: [:index]
 end

@@ -1,0 +1,32 @@
+<h1>修理一覧</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>顧客名</th>
+      <th>車両情報</th>
+      <th>修理内容</th>
+      <th>ステータス</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @repairs.each do |repair| %>
+      <tr>
+        <td><%= repair.car.customer.name %></td>
+        <td>
+          <%= repair.car.car_model %>
+          (<%= repair.car.car_number %>)
+        </td>
+        <td><%= truncate(repair.description, length: 20) %></td>
+        <td><%= repair.status %></td>
+        <td>
+          <%= link_to "編集", edit_repair_path(repair) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "＋修理追加", "#", class: "btn" %>

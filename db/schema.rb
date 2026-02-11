@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_02_10_041402) do
+ActiveRecord::Schema[7.1].define(version: 2026_02_11_131851) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cars", force: :cascade do |t|
+    t.bigint "customer_id", null: false
+    t.string "car_model"
+    t.string "car_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_cars_on_customer_id"
+  end
 
   create_table "customers", force: :cascade do |t|
     t.string "name"
@@ -21,6 +30,15 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_10_041402) do
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "repairs", force: :cascade do |t|
+    t.bigint "car_id", null: false
+    t.text "description"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["car_id"], name: "index_repairs_on_car_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -32,4 +50,6 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_10_041402) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "cars", "customers"
+  add_foreign_key "repairs", "cars"
 end
