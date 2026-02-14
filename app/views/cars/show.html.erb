@@ -1,0 +1,9 @@
+<h1>車両詳細</h1>
+
+<p>顧客名: <%= @car.customer.name %></p>
+<p>車種: <%= @car.car_model %></p>
+<p>ナンバー: <%= @car.car_number %></p>
+
+<hr>
+
+<%= link_to "＋修理追加", new_car_repair_path(@car) %>

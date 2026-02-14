@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'cars/show'
   get 'repairs/show'
   get 'customers/index'
   get 'customers/new'
