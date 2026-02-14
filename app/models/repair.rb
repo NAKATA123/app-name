@@ -1,5 +1,6 @@
 class Repair < ApplicationRecord
   belongs_to :car
+  has_many :rentals, dependent: :destroy
 
   enum status: { reception: 0, working: 1, completed: 2 }
 
