@@ -9,6 +9,12 @@ class CustomersController < ApplicationController
     @customer = Customer.new
   end
 
+  def show
+    @customer = Customer.find(params[:id])
+    @cars = @customer.cars
+    @repairs = @customer.repairs.includes(:car)
+  end
+
   def create
     @customer = Customer.new(customer_params)
     if @customer.save

@@ -1,0 +1,19 @@
+<h1>顧客詳細</h1>
+
+<p>名前：<%= @customer.name %></p>
+<p>電話番号：<%= @customer.phone %></p>
+<p>メール：<%= @customer.email %></p>
+<p>メモ：<%= @customer.notes %></p>
+
+<%= link_to "一覧へ戻る", customers_path %>
+
+<hr>
+
+<h2>車両一覧</h2>
+
+<% @customer.cars.each do |car| %>
+  <p>
+    <%= car.car_model %>
+    （<%= car.car_number %>）
+  </p>
+<% end %>
