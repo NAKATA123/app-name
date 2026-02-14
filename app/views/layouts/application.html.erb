@@ -14,14 +14,14 @@
 
   <% if logged_in? %>
     <header style="background:#6f9aa0; padding:12px 16px;">
-      <div style="max-width:960px; margin:0 auto; display:flex; align-items:center; gap:16px;">
+      <div style="max-width:960px; margin:0 auto; display:flex; align-items:center; gap:80px;">
         <div>
           <%= link_to root_path do %>
           <%= image_tag "logo.png", alt: "ロゴ", style: "height:40px;" %>
           <% end %>
         </div>
 
-        <nav style="display:flex; gap:12px;">
+        <nav style="display:flex; gap:20px;">
           <%= link_to "修理", repairs_path,
               style: "color:#000; text-decoration:none;" %>
 
@@ -33,9 +33,9 @@
         </nav>
 
         <div style="margin-left:auto;">
-          <%= button_to "ログアウト", logout_path,
+          <%= button_to "logout", logout_path,
               method: :delete,
-              style: "background:#39b9b5; border:none; padding:8px 12px; border-radius:4px; cursor:pointer;" %>
+              style: "background:#34675C; border:none; padding:8px 12px; border-radius:4px; cursor:pointer;" %>
         </div>
       </div>
     </header>

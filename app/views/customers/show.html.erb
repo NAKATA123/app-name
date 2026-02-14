@@ -9,11 +9,19 @@
 
 <hr>
 
-<h2>車両一覧</h2>
+<h2>修理一覧</h2>
 
-<% @customer.cars.each do |car| %>
-  <p>
-    <%= car.car_model %>
-    （<%= car.car_number %>）
-  </p>
+<% if @customer.repairs.any? %>
+  <% @customer.repairs.each do |repair| %>
+    <p>
+      <%= repair.car.car_model %>
+      （<%= repair.car.car_number %>）
+      |
+      <span class="status-badge <%= repair.status %>">
+        <%= repair.status_jp %>
+      </span>
+    </p>
+  <% end %>
+<% else %>
+  <p>修理履歴はありません。</p>
 <% end %>

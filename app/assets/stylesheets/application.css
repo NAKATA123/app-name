@@ -13,3 +13,25 @@
  *= require_tree .
  *= require_self
  */
+ .status-badge {
+  padding: 4px 8px;
+  border-radius: 8px;
+  color: white;
+  font-size: 12px;
+}
+
+/* 受付中 */
+.status-badge.reception {
+  background-color: gray;
+}
+
+/* 作業中 */
+.status-badge.working {
+  background-color: #007bff;
+}
+
+/* 完了 */
+.status-badge.completed {
+  background-color: #28a745;
+}
+
