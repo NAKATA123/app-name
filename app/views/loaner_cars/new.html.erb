@@ -1,0 +1,17 @@
+<h1>代車登録</h1>
+
+<%= form_with model: @loaner_car do |f| %>
+  <div>
+    <%= f.label :name, "代車名" %><br>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :car_number, "ナンバー" %><br>
+    <%= f.text_field :car_number %>
+  </div>
+
+  <div>
+    <%= f.submit "登録" %>
+  </div>
+<% end %>

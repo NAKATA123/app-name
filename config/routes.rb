@@ -23,5 +23,5 @@ Rails.application.routes.draw do
     resources :repairs, shallow: true
   end
   resources :repairs, only: [:index]
-  resources :loaner_cars, only: [:index]
+  resources :loaner_cars, only: [:index, :new, :create]
 end
