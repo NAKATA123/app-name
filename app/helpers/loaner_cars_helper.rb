@@ -1,0 +1,2 @@
+module LoanerCarsHelper
+end

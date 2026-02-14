@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'loaner_cars/index'
   get 'cars/show'
   get 'repairs/show'
   get 'customers/index'
@@ -22,4 +23,5 @@ Rails.application.routes.draw do
     resources :repairs, shallow: true
   end
   resources :repairs, only: [:index]
+  resources :loaner_cars, only: [:index]
 end

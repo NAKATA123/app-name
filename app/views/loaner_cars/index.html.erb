@@ -1,0 +1,15 @@
+<h1>代車一覧</h1>
+
+<table border="1" cellpadding="8">
+  <tr>
+    <th>名前</th>
+    <th>ナンバー</th>
+  </tr>
+
+  <% @loaner_cars.each do |car| %>
+    <tr>
+      <td><%= car.name %></td>
+      <td><%= car.car_number %></td>
+    </tr>
+  <% end %>
+</table>
