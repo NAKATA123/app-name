@@ -22,6 +22,7 @@
         <td><%= truncate(repair.description, length: 20) %></td>
         <td><%= repair.status %></td>
         <td>
+          <%= link_to "詳細", repair_path(repair) %> |
           <%= link_to "編集", edit_repair_path(repair) %>
         </td>
       </tr>

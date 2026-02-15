@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'rentals/new'
+  get 'rentals/create'
   get 'loaner_cars/index'
   get 'cars/show'
   get 'repairs/show'
@@ -24,4 +26,5 @@ Rails.application.routes.draw do
   end
   resources :repairs, only: [:index]
   resources :loaner_cars, only: [:index, :new, :create]
+  resources :rentals, only: [:new, :create]
 end

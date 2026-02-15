@@ -6,4 +6,9 @@
 <p>修理内容</p>
 <p><%= @repair.description %></p>
 
-<p>ステータス: <%= @repair.status %></p>
+<p>ステータス: <%= @repair.status_jp %></p>
+
+<hr>
+
+<%= link_to "代車を貸す", new_rental_path(repair_id: @repair.id) %>
+
