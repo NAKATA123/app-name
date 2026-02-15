@@ -1,0 +1,19 @@
+<h1>車両編集</h1>
+
+<%= form_with model: @car do |f| %>
+
+  <div>
+    <%= f.label :car_model, "車種" %><br>
+    <%= f.text_field :car_model %>
+  </div>
+
+  <div>
+    <%= f.label :car_number, "ナンバー" %><br>
+    <%= f.text_field :car_number %>
+  </div>
+
+  <div>
+    <%= f.submit "更新する" %>
+  </div>
+
+<% end %>

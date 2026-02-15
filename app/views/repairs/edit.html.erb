@@ -1,0 +1,19 @@
+<h1>修理編集</h1>
+
+<%= form_with model: @repair do |f| %>
+
+  <div>
+    <%= f.label :description, "修理内容" %><br>
+    <%= f.text_area :description %>
+  </div>
+
+  <div>
+    <%= f.label :status, "ステータス" %><br>
+    <%= f.select :status, Repair.statuses.keys.map { |k| [k.humanize, k] } %>
+  </div>
+
+  <div>
+    <%= f.submit "更新する" %>
+  </div>
+
+<% end %>
