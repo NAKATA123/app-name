@@ -5,8 +5,10 @@
 <p>メール：<%= @customer.email %></p>
 <p>メモ：<%= @customer.notes %></p>
 
-<%= link_to "一覧へ戻る", customers_path %>
-
+<%= link_to "編集", edit_customer_path(@customer) %> |
+<%= link_to "一覧へ戻る", customers_path %> |
+<%= link_to "削除", customers_path(@customer),
+            data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
 <hr>
 
 <h2>修理一覧</h2>
@@ -23,5 +25,5 @@
     </p>
   <% end %>
 <% else %>
-  <p>修理履歴はありません。</p>
+  <p>修理履歴なし</p>
 <% end %>

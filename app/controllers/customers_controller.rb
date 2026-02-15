@@ -24,6 +24,25 @@ class CustomersController < ApplicationController
     end
   end
 
+  def edit
+    @customer = Customer.find(params[:id])
+  end
+
+  def update
+    @customer = Customer.find(params[:id])
+    if @customer.update(customer_params)
+      redirect_to customer_path(@customer), notice: "顧客情報を更新しました"
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+  
+  def destroy
+    @customer = Customer.find(params[:id])
+    @customer.destroy
+    redirect_to custoemers_path, notice: "顧客を削除しました"
+  end
+
   private
 
   def customer_params

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   post   "login",  to: "sessions#create"
   delete "logout", to: "sessions#destroy"
 
-  resources :customers, only: [:index, :new, :create, :show]
+  resources :customers
 
   resources :cars do
     resources :repairs, shallow: true
