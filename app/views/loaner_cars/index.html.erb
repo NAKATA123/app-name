@@ -8,12 +8,16 @@
   <tr>
     <th>名前</th>
     <th>ナンバー</th>
+    <th>貸出履歴</th>
   </tr>
 
   <% @loaner_cars.each do |car| %>
     <tr>
       <td><%= car.name %></td>
       <td><%= car.car_number %></td>
+      <td>
+        <%= link_to "詳細", loaner_car_rentals_path(car) %>
+      </td>
     </tr>
   <% end %>
 </table>

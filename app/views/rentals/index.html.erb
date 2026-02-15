@@ -1,0 +1,31 @@
+<h1>
+  <% if @loaner_car %>
+    <%= @loaner_car.name %> の貸出履歴
+  <% else %>
+    貸出一覧
+  <% end %>
+</h1>
+
+
+<table border="1" cellpadding="8">
+  <tr>
+    <th>代車</th>
+    <th>顧客</th>
+    <th>車両</th>
+    <th>開始日</th>
+    <th>終了日</th>
+  </tr>
+
+  <% @rentals.each do |rental| %>
+    <tr>
+      <td><%= rental.loaner_car.name %></td>
+      <td><%= rental.repair.car.customer.name %></td>
+      <td>
+        <%= rental.repair.car.car_model %>
+        (<%= rental.repair.car.car_number %>)
+      </td>
+      <td><%= rental.start_date %></td>
+      <td><%= rental.end_date %></td>
+    </tr>
+  <% end %>
+</table>
