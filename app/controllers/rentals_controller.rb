@@ -7,14 +7,18 @@ class RentalsController < ApplicationController
     @loaner_cars = LoanerCar.all
   end
 
-  def create
+   def create
     @rental = Rental.new(rental_params)
+
     if @rental.save
       redirect_to repair_path(@rental.repair)
     else
+      @repair = Repair.find(@rental.repair_id)
+      @loaner_cars = LoanerCar.all
       render :new, status: :unprocessable_entity
     end
   end
+
 
   def index
     if params[:loaner_car_id]
