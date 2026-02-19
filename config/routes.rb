@@ -18,4 +18,6 @@ Rails.application.routes.draw do
   end
 
   resources :rentals, only: [:new, :create]
+
+  resources :users, only: [:new, :create]
 end
