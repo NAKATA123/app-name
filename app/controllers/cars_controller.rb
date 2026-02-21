@@ -3,6 +3,22 @@ class CarsController < ApplicationController
     @car = Car.find(params[:id])
   end
 
+  def new
+    @customer = Customer.find(params[:customer_id])
+    @car = @customer.cars.build
+  end
+
+  def create
+    @customer = Customer.find(params[:customer_id])
+    @car = @customer.cars.build(car_params)
+
+    if @car.save
+      redirect_to customer_path(@customer), notice: "車両を登録しました"
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
   def edit
     @car = Car.find(params[:id])
   end
@@ -25,6 +41,6 @@ class CarsController < ApplicationController
   private
 
   def car_params
-    params.require(:car).permit(:car_model, :car_number, :customer_id)
+    params.require(:car).permit(:car_model, :car_number)
   end
 end

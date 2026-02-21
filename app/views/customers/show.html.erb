@@ -7,8 +7,28 @@
 
 <%= link_to "編集", edit_customer_path(@customer) %> |
 <%= link_to "一覧へ戻る", customers_path %> |
-<%= link_to "削除", customers_path(@customer),
+<%= link_to "削除", customer_path(@customer),
             data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
+
+<hr>
+
+<h2>車両一覧</h2>
+
+<p>
+  <%= link_to "＋車両追加", new_customer_car_path(@customer) %>
+</p>
+
+<% if @customer.cars.any? %>
+  <% @customer.cars.each do |car| %>
+    <p>
+      <%= link_to "#{car.car_model}（#{car.car_number}）",
+                  customer_car_path(@customer, car) %>
+    </p>
+  <% end %>
+<% else %>
+  <p>車両なし</p>
+<% end %>
+
 <hr>
 
 <h2>修理一覧</h2>

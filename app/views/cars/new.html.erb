@@ -1,0 +1,21 @@
+<h1>車両登録</h1>
+
+<p>顧客名: <%= @customer.name %></p>
+
+<%= form_with model: [@customer, @car] do |f| %>
+
+  <div>
+    <%= f.label :car_model, "車種" %><br>
+    <%= f.text_field :car_model %>
+  </div>
+
+  <div>
+    <%= f.label :car_number, "ナンバー" %><br>
+    <%= f.text_field :car_number %>
+  </div>
+
+  <div>
+    <%= f.submit "登録" %>
+  </div>
+
+<% end %>
