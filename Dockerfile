@@ -61,4 +61,4 @@ USER rails:rails
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 EXPOSE 3000
-CMD ["./bin/rails", "server"]
+CMD ["bash", "-c", "bin/rails db:prepare && bin/rails server -b 0.0.0.0"]
