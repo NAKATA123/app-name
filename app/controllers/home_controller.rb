@@ -2,14 +2,13 @@ class HomeController < ApplicationController
   def top
     return unless logged_in?
 
-    today = Time.zone.today.all_day
+    @reception_count = Repair.reception.count
+    @working_count   = Repair.working.count
+    @completed_count = Repair.completed.count
 
-    @reception_count = Repair.where(status: :reception, created_at: today).count
-    @working_count   = Repair.where(status: :working,   created_at: today).count
-    @completed_count = Repair.where(status: :completed, created_at: today).count
+    today = Time.zone.today
+    @loaned_count = Rental.where("start_date <= ? AND end_date >= ?", today, today).count
 
-    # ここ修正
-    @loaned_count = Rental.where("end_date >= ?", Date.today).count
-    @available_count = LoanerCar.count - @loaned_count
+    @available_count = [LoanerCar.count - @loaned_count, 0].max
   end
 end
