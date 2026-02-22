@@ -5,12 +5,19 @@
     <div style="display:flex; flex-direction:column; align-items:center; gap:16px;">
       <div style="width:360px; border:1px solid #bbb; padding:16px; background:#fff;">
         <h2 style="margin:0 0 8px; font-size:16px;">本日の修理状況</h2>
-        <p style="margin:0;">受付中：0件 / 作業中：0件 / 完了：0件</p>
+        <p style="margin:0;">
+          受付中：<%= @reception_count %>件 /
+          作業中：<%= @working_count %>件 /
+          完了：<%= @completed_count %>件
+        </p>
       </div>
 
       <div style="width:360px; border:1px solid #bbb; padding:16px; background:#fff;">
         <h2 style="margin:0 0 8px; font-size:16px;">代車の貸出状況</h2>
-        <p style="margin:0;">貸出中：0台 / 空き：0台</p>
+        <p style="margin:0;">
+          貸出中：<%= @loaned_count %>台 /
+          空き：<%= @available_count %>台
+        </p>
       </div>
     </div>
   <% else %>
