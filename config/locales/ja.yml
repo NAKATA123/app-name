@@ -1,0 +1,8 @@
+ja:
+  enums:
+    repair:
+      status:
+        reception: 受付中
+        working: 作業中
+        completed: 完了
+        

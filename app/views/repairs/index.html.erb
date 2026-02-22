@@ -20,7 +20,11 @@
           (<%= repair.car.car_number %>)
         </td>
         <td><%= truncate(repair.description, length: 20) %></td>
-        <td><%= repair.status %></td>
+        <td>
+          <span class="status-badge <%= repair.status %>">
+            <%= t("enums.repair.status.#{repair.status}") %>
+          </span>
+        </td>
         <td>
           <%= link_to "詳細", repair_path(repair) %> |
           <%= link_to "編集", edit_repair_path(repair) %>

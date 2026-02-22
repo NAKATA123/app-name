@@ -9,7 +9,8 @@
 
   <div>
     <%= f.label :status, "ステータス" %><br>
-    <%= f.select :status, Repair.statuses.keys.map { |k| [k.humanize, k] } %>
+    <%= f.select :status,
+      Repair.statuses.keys.map { |k| [t("enums.repair.status.#{k}"), k] } %>
   </div>
 
   <div>
