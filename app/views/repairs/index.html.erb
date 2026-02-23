@@ -1,6 +1,6 @@
 <h1>修理一覧</h1>
 
-<table>
+<table class="repair-table">
   <thead>
     <tr>
       <th>顧客名</th>
@@ -26,8 +26,8 @@
           </span>
         </td>
         <td>
-          <%= link_to "詳細", repair_path(repair) %> |
-          <%= link_to "編集", edit_repair_path(repair) %>
+          <%= link_to "詳細", repair_path(repair), class: "btn-outline" %>
+          <%= link_to "編集", edit_repair_path(repair), class: "btn-outline" %>
         </td>
       </tr>
     <% end %>

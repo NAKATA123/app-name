@@ -1,10 +1,10 @@
 <h1>代車一覧</h1>
 
-<p>
-  <%= link_to "代車を登録する", new_loaner_car_path %>
-</p>
+<div style="margin: 20px 0;">
+  <%= link_to "代車を登録する", new_loaner_car_path, class: "btn-primary" %>
+</div>
 
-<table border="1" cellpadding="8">
+<table class="repair-table">
   <tr>
     <th>名前</th>
     <th>ナンバー</th>
@@ -16,7 +16,7 @@
       <td><%= car.name %></td>
       <td><%= car.car_number %></td>
       <td>
-        <%= link_to "詳細", loaner_car_rentals_path(car) %>
+        <%= link_to "詳細", loaner_car_rentals_path(car), class: "btn-outline" %>
       </td>
     </tr>
   <% end %>
@@ -27,7 +27,7 @@
 <h2>貸出中</h2>
 
 <% if @current_rentals.any? %>
-  <table class="table">
+  <table class="repair-table">
     <tr>
       <th>代車</th>
       <th>期間</th>
@@ -42,13 +42,13 @@
     <% end %>
   </table>
 <% else %>
-  <p>現在貸出中の代車はありません。</p>
+  <p style="color:#777;">現在貸出中の代車はありません。</p>
 <% end %>
 
 <h2>貸出予定</h2>
 
 <% if @upcoming_rentals.any? %>
-  <table class="table">
+  <table class="repair-table">
     <tr>
       <th>代車</th>
       <th>期間</th>
@@ -63,5 +63,5 @@
     <% end %>
   </table>
 <% else %>
-  <p>貸出予定はありません。</p>
+  <p style="color:#777;">貸出予定はありません。</p>
 <% end %>
