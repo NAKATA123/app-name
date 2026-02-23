@@ -3,6 +3,18 @@ class LoanerCarsController < ApplicationController
 
   def index
     @loaner_cars = LoanerCar.all.order(created_at: :desc)
+
+    today = Date.today
+
+    @current_rentals = Rental
+      .includes(:loaner_car, repair: { car: :customer })
+      .where("start_date <= ? AND end_date >= ?", today, today)
+      .order(:start_date)
+
+    @upcoming_rentals = Rental
+      .includes(:loaner_car, repair: { car: :customer })
+      .where("start_date > ?", today)
+      .order(:start_date)
   end
 
   def new

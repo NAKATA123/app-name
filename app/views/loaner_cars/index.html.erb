@@ -21,3 +21,47 @@
     </tr>
   <% end %>
 </table>
+
+<hr>
+
+<h2>貸出中</h2>
+
+<% if @current_rentals.any? %>
+  <table class="table">
+    <tr>
+      <th>代車</th>
+      <th>期間</th>
+      <th>顧客</th>
+    </tr>
+    <% @current_rentals.each do |r| %>
+      <tr>
+        <td><%= r.loaner_car.name %></td>
+        <td><%= r.start_date %> 〜 <%= r.end_date %></td>
+        <td><%= r.repair.car.customer.name %></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <p>現在貸出中の代車はありません。</p>
+<% end %>
+
+<h2>貸出予定</h2>
+
+<% if @upcoming_rentals.any? %>
+  <table class="table">
+    <tr>
+      <th>代車</th>
+      <th>期間</th>
+      <th>顧客</th>
+    </tr>
+    <% @upcoming_rentals.each do |r| %>
+      <tr>
+        <td><%= r.loaner_car.name %></td>
+        <td><%= r.start_date %> 〜 <%= r.end_date %></td>
+        <td><%= r.repair.car.customer.name %></td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <p>貸出予定はありません。</p>
+<% end %>
