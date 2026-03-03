@@ -1,8 +1,9 @@
-<h1>代車貸出登録</h1>
+<h1 class="page-title">代車貸出登録</h1>
 
 <% if @rental.errors.any? %>
-  <div style="color: red; margin-bottom: 20px;">
-    <ul>
+  <div class="card" style="border-color:#ffbcbc; background:#ffeaea; margin-bottom:20px;">
+    <p style="font-weight:800; margin-top:0;">入力内容を確認してください</p>
+    <ul style="margin:0; padding-left:18px;">
       <% @rental.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
@@ -10,31 +11,38 @@
   </div>
 <% end %>
 
-<%= form_with model: @rental do |f| %>
+<div class="card" style="margin-bottom:20px;">
+  <p><strong>顧客名:</strong> <%= @repair.car.customer.name %></p>
+  <p>
+    <strong>車両:</strong>
+    <%= @repair.car.car_model %>（<%= @repair.car.car_number %>）
+  </p>
+</div>
 
-  <%= f.hidden_field :repair_id, value: @repair.id %>
+<div class="card">
+  <%= form_with model: @rental, local: true do |f| %>
 
-  <div>
-    <%= f.label :loaner_car_id, "代車選択" %><br>
-    <%= f.collection_select :loaner_car_id, @loaner_cars, :id, :name %>
-  </div>
+    <%= f.hidden_field :repair_id, value: @repair.id %>
 
-  <div>
-    <%= f.label :start_date, "開始日" %><br>
-    <%= f.date_field :start_date %>
-  </div>
+    <div>
+      <%= f.label :loaner_car_id, "代車選択", class: "form-label" %>
+      <%= f.collection_select :loaner_car_id, @loaner_cars, :id, :name, {}, class: "form-select" %>
+    </div>
 
-  <div>
-    <%= f.label :end_date, "終了日" %><br>
-    <%= f.date_field :end_date %>
-  </div>
+    <div>
+      <%= f.label :start_date, "開始日", class: "form-label" %>
+      <%= f.date_field :start_date, class: "form-input" %>
+    </div>
 
-  <div style="margin-top: 15px;">
-    <%= f.submit "貸出登録" %>
-  </div>
+    <div>
+      <%= f.label :end_date, "終了日", class: "form-label" %>
+      <%= f.date_field :end_date, class: "form-input" %>
+    </div>
 
-<% end %>
+    <div style="margin-top:20px;">
+      <%= f.submit "貸出登録", class: "btn-primary" %>
+      <%= link_to "修理詳細に戻る", repair_path(@repair), class: "btn-outline" %>
+    </div>
 
-<br>
-
-<%= link_to "修理詳細に戻る", repair_path(@repair) %>
+  <% end %>
+</div>

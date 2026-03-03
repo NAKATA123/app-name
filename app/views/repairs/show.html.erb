@@ -1,17 +1,30 @@
-<h1>修理詳細</h1>
+<h1 class="page-title">修理詳細</h1>
 
-<p>顧客名: <%= @repair.car.customer.name %></p>
-<p>車両: <%= @repair.car.car_model %>（<%= @repair.car.car_number %>）</p>
+<div class="card" style="margin-bottom:20px;">
+  <p><strong>顧客名:</strong> <%= @repair.car.customer.name %></p>
+  <p>
+    <strong>車両:</strong>
+    <%= @repair.car.car_model %>（<%= @repair.car.car_number %>）
+  </p>
 
-<p>修理内容</p>
-<p><%= @repair.description %></p>
+  <p style="margin-top:12px;">
+    <strong>ステータス:</strong>
+    <span class="status-badge <%= @repair.status %>">
+      <%= @repair.status_jp %>
+    </span>
+  </p>
+</div>
 
-<p>ステータス: <%= @repair.status_jp %></p>
+<div class="card">
+  <p><strong>修理内容</strong></p>
+  <p style="white-space: pre-wrap;"><%= @repair.description %></p>
 
-<hr>
+  <div style="margin-top:20px;">
+    <%= link_to "代車を貸す", new_rental_path(repair_id: @repair.id), class: "btn-primary" %>
+    <%= link_to "編集", edit_repair_path(@repair), class: "btn-outline" %>
 
-<%= link_to "代車を貸す", new_rental_path(repair_id: @repair.id) %>
-<%= link_to "編集", edit_repair_path(@repair) %> |
-<%= link_to "削除", repair_path(@repair),
-            data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } %>
-
+    <%= link_to "削除", repair_path(@repair),
+      data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
+      class: "btn-danger" %>
+  </div>
+</div>

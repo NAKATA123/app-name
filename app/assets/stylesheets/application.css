@@ -1,39 +1,27 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
  *= require_tree .
  *= require_self
- */
- .status-badge {
+*/
+
+/* =========================
+   Status Badge
+========================= */
+
+.status-badge {
   padding: 4px 8px;
   border-radius: 8px;
   color: white;
   font-size: 12px;
+  font-weight: 600;
 }
 
-/* 受付中 */
-.status-badge.reception {
-  background-color: gray;
-}
+.status-badge.reception { background-color: gray; }
+.status-badge.working   { background-color: #007bff; }
+.status-badge.completed { background-color: #28a745; }
 
-/* 作業中 */
-.status-badge.working {
-  background-color: #007bff;
-}
-
-/* 完了 */
-.status-badge.completed {
-  background-color: #28a745;
-}
+/* =========================
+   Header
+========================= */
 
 .app-header {
   background: #6f9aa0;
@@ -45,26 +33,49 @@
   margin: 0 auto;
   display: flex;
   align-items: center;
-  gap: 80px;
+  gap: 40px;
 }
 
-.logout {
-  margin-left: auto;
-}
+.logout { margin-left: auto; }
 
 .logout-btn {
   background: transparent;
   border: 1px solid white;
   padding: 6px 12px;
-  border-radius: 4px;
+  border-radius: 6px;
   color: white;
   cursor: pointer;
+  transition: 0.2s;
 }
 
 .logout-btn:hover {
   background: white;
   color: #6f9aa0;
 }
+
+/* =========================
+   Titles
+========================= */
+
+.page-title {
+  font-size: 28px;
+  font-weight: 800;
+  margin: 28px 0 16px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 800;
+  margin: 28px 0 12px;
+}
+
+.muted {
+  color: #777;
+}
+
+/* =========================
+   Table (Card Style)
+========================= */
 
 .repair-table {
   width: 100%;
@@ -93,6 +104,10 @@
   background: #f9fbfd;
 }
 
+/* =========================
+   Buttons
+========================= */
+
 .btn-primary {
   display: inline-block;
   background: #2f6f75;
@@ -112,6 +127,7 @@
 }
 
 .btn-outline {
+  display: inline-block;
   border: 1px solid #6f9aa0;
   color: #6f9aa0;
   padding: 6px 12px;
@@ -119,10 +135,67 @@
   text-decoration: none;
   font-size: 13px;
   font-weight: 600;
+  transition: 0.2s;
+  margin-right: 8px;
 }
 
 .btn-outline:hover {
   background: #f2f7f8;
   border-color: #5c878d;
   color: #5c878d;
+}
+
+.btn-danger {
+  display: inline-block;
+  border: 1px solid #dc3545;
+  background: #dc3545;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  transition: 0.2s;
+}
+
+.btn-danger:hover {
+  background: #b02a37;
+  border-color: #b02a37;
+}
+
+/* =========================
+   Card (for forms)
+========================= */
+
+.card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+/* =========================
+   Form
+========================= */
+
+.form-label {
+  font-weight: 700;
+  display: block;
+  margin: 12px 0 6px;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 14px;
+  background: #fff;
+}
+
+.form-textarea {
+  min-height: 120px;
 }

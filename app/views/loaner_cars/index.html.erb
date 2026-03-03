@@ -1,4 +1,4 @@
-<h1>代車一覧</h1>
+<h1 class="page-title">代車一覧</h1>
 
 <div style="margin: 20px 0;">
   <%= link_to "代車を登録する", new_loaner_car_path, class: "btn-primary" %>
@@ -22,9 +22,9 @@
   <% end %>
 </table>
 
-<hr>
+<hr style="margin: 40px 0; border: none; border-top: 1px solid #eee;">
 
-<h2>貸出中</h2>
+<h2 class="section-title">貸出中</h2>
 
 <% if @current_rentals.any? %>
   <table class="repair-table">
@@ -36,16 +36,20 @@
     <% @current_rentals.each do |r| %>
       <tr>
         <td><%= r.loaner_car.name %></td>
-        <td><%= r.start_date %> 〜 <%= r.end_date %></td>
+        <td>
+          <%= r.start_date.strftime("%Y/%m/%d") %>
+          〜
+          <%= r.end_date.strftime("%Y/%m/%d") %>
+        </td>
         <td><%= r.repair.car.customer.name %></td>
       </tr>
     <% end %>
   </table>
 <% else %>
-  <p style="color:#777;">現在貸出中の代車はありません。</p>
+  <p class="muted">現在貸出中の代車はありません。</p>
 <% end %>
 
-<h2>貸出予定</h2>
+<h2 class="section-title">貸出予定</h2>
 
 <% if @upcoming_rentals.any? %>
   <table class="repair-table">
@@ -57,11 +61,15 @@
     <% @upcoming_rentals.each do |r| %>
       <tr>
         <td><%= r.loaner_car.name %></td>
-        <td><%= r.start_date %> 〜 <%= r.end_date %></td>
+        <td>
+          <%= r.start_date.strftime("%Y/%m/%d") %>
+          〜
+          <%= r.end_date.strftime("%Y/%m/%d") %>
+        </td>
         <td><%= r.repair.car.customer.name %></td>
       </tr>
     <% end %>
   </table>
 <% else %>
-  <p style="color:#777;">貸出予定はありません。</p>
+  <p class="muted">貸出予定はありません。</p>
 <% end %>
