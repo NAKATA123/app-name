@@ -1,29 +1,41 @@
-<main style="max-width:960px; margin:24px auto; padding:0 16px;">
-  <% if logged_in? %>
-    <h1 style="text-align:center; margin:24px 0;">ダッシュボード</h1>
+<h1 class="page-title">ダッシュボード</h1>
 
-    <div style="display:flex; flex-direction:column; align-items:center; gap:16px;">
-      <div style="width:360px; border:1px solid #bbb; padding:16px; background:#fff;">
-        <h2 style="margin:0 0 8px; font-size:16px;">本日の修理状況</h2>
-        <p style="margin:0;">
-          受付中：<%= @reception_count %>件 /
-          作業中：<%= @working_count %>件 /
-          完了：<%= @completed_count %>件
-        </p>
-      </div>
+<div class="card" style="margin-bottom:24px;">
+  <p class="muted" style="margin:0;">本日</p>
+  <p style="margin:6px 0 0; font-weight:800; font-size:16px;">
+    <%= Time.zone.today.strftime("%Y/%m/%d") %>
+  </p>
+</div>
 
-      <div style="width:360px; border:1px solid #bbb; padding:16px; background:#fff;">
-        <h2 style="margin:0 0 8px; font-size:16px;">代車の貸出状況</h2>
-        <p style="margin:0;">
-          貸出中：<%= @loaned_count %>台 /
-          空き：<%= @available_count %>台
-        </p>
-      </div>
-    </div>
-  <% else %>
-    <h1 style="text-align:center; margin:24px 0;">ようこそ</h1>
-    <p style="text-align:center;">
-      ログインするとダッシュボードが表示されます
-    </p>
-  <% end %>
-</main>
+<!-- 修理状況 -->
+<h2 class="section-title">修理状況</h2>
+<div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; margin-bottom:32px;">
+  <div class="card">
+    <p class="muted">受付中</p>
+    <p style="font-size:32px; font-weight:900;"><%= @reception_count %></p>
+  </div>
+
+  <div class="card">
+    <p class="muted">作業中</p>
+    <p style="font-size:32px; font-weight:900;"><%= @working_count %></p>
+  </div>
+
+  <div class="card">
+    <p class="muted">完了</p>
+    <p style="font-size:32px; font-weight:900;"><%= @completed_count %></p>
+  </div>
+</div>
+
+<!-- 代車状況 -->
+<h2 class="section-title">代車状況</h2>
+<div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:16px;">
+  <div class="card">
+    <p class="muted">貸出中</p>
+    <p style="font-size:32px; font-weight:900;"><%= @loaned_count %></p>
+  </div>
+
+  <div class="card">
+    <p class="muted">空き台数</p>
+    <p style="font-size:32px; font-weight:900;"><%= @available_count %></p>
+  </div>
+</div>
