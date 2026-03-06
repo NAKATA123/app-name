@@ -1,27 +1,35 @@
-<h1>ログイン</h1>
+<div class="login-page">
+  <div class="login-card">
+    <div class="login-header">
+      <%= image_tag "logo.png", alt: "TOHSAKU", class: "login-logo" %>
+      <h1>ログイン</h1>
+      <p>おかえりなさい。TOHSAKUへログインします。</p>
+    </div>
 
-<% if flash[:alert] %>
-  <p style="color:red;"><%= flash[:alert] %></p>
-<% end %>
+    <% if flash[:alert] %>
+      <div class="login-alert">
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
 
+    <%= form_with url: login_path, method: :post, class: "login-form" do |f| %>
+      <div class="form-group">
+        <%= f.label :email, "メールアドレス" %>
+        <%= f.email_field :email, class: "form-input", placeholder: "example@email.com" %>
+      </div>
 
-<%= form_with url: login_path, method: :post do |f| %>
-  <div>
-    <%= f.label :email, "メールアドレス" %><br>
-    <%= f.email_field :email %>
+      <div class="form-group">
+        <%= f.label :password, "パスワード" %>
+        <%= f.password_field :password, class: "form-input", placeholder: "••••••••" %>
+      </div>
+
+      <div>
+        <%= f.submit "ログイン", class: "btn-primary login-btn" %>
+      </div>
+
+      <p class="login-register">
+        <%= link_to "新規登録はこちら", new_user_path, class: "login-link" %>
+      </p>
+    <% end %>
   </div>
-
-  <div>
-    <%= f.label :password, "パスワード" %><br>
-    <%= f.password_field :password %>
-  </div>
-
-  <div>
-    <%= f.submit "ログイン" %>
-  </div>
-
-  <p>
-    <%= link_to "新規登録はこちら", new_user_path %>
-  </p>
-
-<% end %>
+</div>
