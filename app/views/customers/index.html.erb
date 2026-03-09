@@ -1,21 +1,44 @@
-<h1>顧客一覧</h1>
+<div class="page-container">
 
-<p>
-  <%= link_to "顧客を登録する", new_customer_path, class: "btn-primary" %>
-</p>
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">顧客一覧</h1>
+      <p class="muted">登録されている顧客を確認できます。</p>
+    </div>
 
-<table class="repair-table">
-  <tr>
-    <th>名前</th>
-    <th>電話番号</th>
-    <th>メール</th>
-  </tr>
+    <div class="page-actions">
+      <%= link_to "＋顧客登録", new_customer_path, class: "btn-primary" %>
+    </div>
+  </div>
 
-  <% @customers.each do |customer| %>
-    <tr>
-      <td><%= link_to customer.name, customer_path(customer) %></td>
-      <td><%= customer.phone %></td>
-      <td><%= customer.email %></td>
-    </tr>
+  <% if @customers.any? %>
+    <table class="repair-table">
+      <thead>
+        <tr>
+          <th>名前</th>
+          <th>電話番号</th>
+          <th>メール</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @customers.each do |customer| %>
+          <tr>
+            <td class="cell-link">
+              <%= link_to customer_path(customer), class: "cell-link-anchor" do %>
+                <span><%= customer.name %></span>
+              <% end %>
+            </td>
+            <td><%= customer.phone.presence || "-" %></td>
+            <td><%= customer.email.presence || "-" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <div class="card empty-state">
+      <p class="muted">顧客はまだ登録されていません。</p>
+    </div>
   <% end %>
-</table>
+
+</div>

@@ -55,42 +55,43 @@ body {
 /* nav */
 .nav {
   display: flex;
-  gap: 28px;
+  gap: 12px;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 /* nav links */
 .nav-link {
   color: #fff;
   text-decoration: none;
-  font-weight: 600;
-  font-size: 15px;
-  padding: 6px 4px;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 8px 14px;
+  border-radius: 999px;
   transition: 0.2s;
-  position: relative;
+  line-height: 1.2;
 }
 
 .nav-link:hover {
-  opacity: 0.85;
+  background: rgba(255, 255, 255, 0.12);
+  opacity: 1;
 }
 
-/* underline animation */
+/* underline animation OFF */
 .nav-link::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 0;
-  height: 2px;
-  background: #fff;
-  transition: 0.2s;
+  display: none;
 }
 
-.nav-link:hover::after {
-  width: 100%;
+/* active tab */
+.nav-link.active {
+  background: rgba(255,255,255,0.18);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.35);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15);
 }
 
-/* button_to form reset */
+/* logout */
+
 .logout form {
   margin: 0;
 }
@@ -492,4 +493,26 @@ body {
     overflow-x: auto;
     white-space: nowrap;
   }
+}
+
+/* =========================
+   Table Cell Link
+========================= */
+.cell-link {
+  padding: 0 !important;
+}
+
+.cell-link-anchor {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 100%;
+  padding: 16px;
+  color: #2f6f75;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.cell-link-anchor:hover {
+  color: #255c61;
 }
