@@ -2,40 +2,52 @@ class RentalsController < ApplicationController
   before_action :require_login
 
   def new
-    @repair = Repair.find(params[:repair_id])
-    @rental = Rental.new
+    @repair = Repair.find_by(id: params[:repair_id])
+    @rental = Rental.new(start_date: params[:start_date])
     @loaner_cars = LoanerCar.all
   end
 
-   def create
+  def create
     @rental = Rental.new(rental_params)
 
     if @rental.save
-      redirect_to repair_path(@rental.repair)
+      if @rental.repair.present?
+        redirect_to repair_path(@rental.repair), notice: "代車を登録しました"
+      else
+        redirect_to loaner_cars_path, notice: "代車を登録しました"
+      end
     else
-      @repair = Repair.find(@rental.repair_id)
+      @repair = Repair.find_by(id: @rental.repair_id)
       @loaner_cars = LoanerCar.all
       render :new, status: :unprocessable_entity
     end
   end
-
 
   def index
     if params[:loaner_car_id]
       @loaner_car = LoanerCar.find(params[:loaner_car_id])
       @rentals = @loaner_car.rentals
                              .includes(repair: { car: :customer })
-                             .order(start_date: :asc)
+                             .order(:start_date)
     else
       @rentals = Rental.includes(repair: { car: :customer }, loaner_car: {})
-                       .order(start_date: :asc)
+                       .order(:start_date)
     end
   end
 
+  def show
+    @rental = Rental.includes(:loaner_car, repair: { car: :customer })
+                    .find(params[:id])
+  end
 
   private
 
   def rental_params
-    params.require(:rental).permit(:loaner_car_id, :repair_id, :start_date, :end_date)
+    params.require(:rental).permit(
+      :loaner_car_id,
+      :repair_id,
+      :start_date,
+      :end_date
+    )
   end
 end

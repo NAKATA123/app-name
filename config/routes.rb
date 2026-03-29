@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get    "login",  to: "sessions#new"
   post   "login",  to: "sessions#create"
   delete "logout", to: "sessions#destroy"
+  get "rentals/calendar", to: "rentals#calendar"
 
   resources :customers do
     resources :cars do
@@ -17,7 +18,7 @@ Rails.application.routes.draw do
     resources :rentals, only: [:index]
   end
 
-  resources :rentals, only: [:new, :create]
+  resources :rentals, only: [:new, :create, :show]
 
   resources :users, only: [:new, :create]
 end

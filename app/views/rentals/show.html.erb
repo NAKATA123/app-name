@@ -1,0 +1,33 @@
+<div class="page-container">
+  <h1 class="page-title">貸出詳細</h1>
+
+  <table class="repair-table">
+    <tr>
+      <th>代車</th>
+      <td><%= @rental.loaner_car.name %></td>
+    </tr>
+
+    <tr>
+      <th>ナンバー</th>
+      <td><%= @rental.loaner_car.car_number %></td>
+    </tr>
+
+    <tr>
+      <th>顧客</th>
+      <td><%= @rental.repair.car.customer.name %></td>
+    </tr>
+
+    <tr>
+      <th>期間</th>
+      <td>
+        <%= @rental.start_date.strftime("%Y/%m/%d") %>
+        〜
+        <%= @rental.end_date.strftime("%Y/%m/%d") %>
+      </td>
+    </tr>
+  </table>
+
+  <div style="margin-top: 20px;">
+    <%= link_to "戻る", loaner_cars_path, class: "btn-outline" %>
+  </div>
+</div>

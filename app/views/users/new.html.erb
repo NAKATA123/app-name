@@ -1,32 +1,53 @@
-<h1>ユーザー登録</h1>
+<div class="login-page">
+  <div class="login-card">
 
-<% if @user.errors.any? %>
-  <ul>
-    <% @user.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
+    <div class="login-header">
+      <h1 class="login-title">アカウント作成</h1>
+      <p class="login-subtitle">
+        TOHSAKUの業務管理アカウントを登録します。
+      </p>
+    </div>
+
+    <% if @user.errors.any? %>
+      <div class="login-alert">
+        <ul style="margin:0; padding-left:16px;">
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
     <% end %>
-  </ul>
-<% end %>
 
-<%= form_with model: @user do |f| %>
+    <%= form_with model: @user, class: "login-form" do |f| %>
 
-  <div>
-    <%= f.label :email %><br>
-    <%= f.email_field :email %>
+      <div>
+        <%= f.label :email, "メールアドレス", class: "form-label" %>
+        <%= f.email_field :email,
+              class: "form-input",
+              placeholder: "example@email.com" %>
+      </div>
+
+      <div>
+        <%= f.label :password, "パスワード", class: "form-label" %>
+        <%= f.password_field :password,
+              class: "form-input",
+              placeholder: "8文字以上" %>
+      </div>
+
+      <div>
+        <%= f.label :password_confirmation, "パスワード（確認）", class: "form-label" %>
+        <%= f.password_field :password_confirmation,
+              class: "form-input" %>
+      </div>
+
+      <%= f.submit "アカウント作成", class: "btn-primary login-btn" %>
+
+      <p class="login-register">
+        すでにアカウントをお持ちですか？
+        <%= link_to "ログイン", login_path, class: "login-link" %>
+      </p>
+
+    <% end %>
+
   </div>
-
-  <div>
-    <%= f.label :password %><br>
-    <%= f.password_field :password %>
-  </div>
-
-  <div>
-    <%= f.label :password_confirmation, "パスワード確認" %><br>
-    <%= f.password_field :password_confirmation %>
-  </div>
-
-  <div>
-    <%= f.submit "登録する" %>
-  </div>
-
-<% end %>
+</div>

@@ -1,75 +1,165 @@
-<h1 class="page-title">代車一覧</h1>
+<div class="page-container">
 
-<div style="margin: 20px 0;">
-  <%= link_to "代車を登録する", new_loaner_car_path, class: "btn-primary" %>
+  <h1 class="page-title">代車管理</h1>
+
+  <!-- タブ -->
+  <div class="tab-nav">
+    <button class="tab-btn active" data-tab="list">一覧</button>
+    <button class="tab-btn" data-tab="calendar">カレンダー</button>
+  </div>
+
+  <!-- =========================
+       一覧タブ
+  ========================== -->
+  <div id="tab-list" class="tab-content active">
+
+    <div style="margin: 20px 0;">
+      <%= link_to "代車を登録する", new_loaner_car_path, class: "btn-primary" %>
+    </div>
+
+    <table class="repair-table">
+      <tr>
+        <th>名前</th>
+        <th>ナンバー</th>
+        <th>貸出履歴</th>
+      </tr>
+
+      <% @loaner_cars.each do |car| %>
+        <tr>
+          <td><%= car.name %></td>
+          <td><%= car.car_number %></td>
+          <td>
+            <%= link_to "詳細", loaner_car_rentals_path(car), class: "btn-outline" %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+
+    <hr style="margin: 40px 0; border: none; border-top: 1px solid #eee;">
+
+    <h2 class="section-title">貸出中</h2>
+
+    <% if @current_rentals.any? %>
+      <table class="repair-table">
+        <tr>
+          <th>代車</th>
+          <th>期間</th>
+          <th>顧客</th>
+        </tr>
+        <% @current_rentals.each do |r| %>
+          <tr>
+            <td><%= r.loaner_car.name %></td>
+            <td>
+              <%= r.start_date.strftime("%Y/%m/%d") %> 〜
+              <%= r.end_date.strftime("%Y/%m/%d") %>
+            </td>
+            <td>
+              <%= r.repair&.car&.customer&.name || "顧客情報なし" %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    <% else %>
+      <p class="muted">現在貸出中の代車はありません。</p>
+    <% end %>
+
+    <h2 class="section-title">貸出予定</h2>
+
+    <% if @upcoming_rentals.any? %>
+      <table class="repair-table">
+        <tr>
+          <th>代車</th>
+          <th>期間</th>
+          <th>顧客</th>
+        </tr>
+        <% @upcoming_rentals.each do |r| %>
+          <tr>
+            <td><%= r.loaner_car.name %></td>
+            <td>
+              <%= r.start_date.strftime("%Y/%m/%d") %> 〜
+              <%= r.end_date.strftime("%Y/%m/%d") %>
+            </td>
+            <td>
+              <%= r.repair&.car&.customer&.name || "顧客情報なし" %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    <% else %>
+      <p class="muted">貸出予定はありません。</p>
+    <% end %>
+
+  </div>
+
+  <!-- =========================
+       カレンダータブ
+  ========================== -->
+  <div id="tab-calendar" class="tab-content">
+    <div id="calendar"></div>
+  </div>
+
 </div>
 
-<table class="repair-table">
-  <tr>
-    <th>名前</th>
-    <th>ナンバー</th>
-    <th>貸出履歴</th>
-  </tr>
+<script>
+document.addEventListener("turbo:load", function () {
 
-  <% @loaner_cars.each do |car| %>
-    <tr>
-      <td><%= car.name %></td>
-      <td><%= car.car_number %></td>
-      <td>
-        <%= link_to "詳細", loaner_car_rentals_path(car), class: "btn-outline" %>
-      </td>
-    </tr>
-  <% end %>
-</table>
+  const buttons = document.querySelectorAll(".tab-btn");
+  const contents = document.querySelectorAll(".tab-content");
 
-<hr style="margin: 40px 0; border: none; border-top: 1px solid #eee;">
+  let calendar;
 
-<h2 class="section-title">貸出中</h2>
-
-<% if @current_rentals.any? %>
-  <table class="repair-table">
-    <tr>
-      <th>代車</th>
-      <th>期間</th>
-      <th>顧客</th>
-    </tr>
-    <% @current_rentals.each do |r| %>
-      <tr>
-        <td><%= r.loaner_car.name %></td>
-        <td>
-          <%= r.start_date.strftime("%Y/%m/%d") %>
-          〜
-          <%= r.end_date.strftime("%Y/%m/%d") %>
-        </td>
-        <td><%= r.repair.car.customer.name %></td>
-      </tr>
+  // 👇 カレンダー用データ
+  const events = [
+    <% @rentals.each do |r| %>
+      {
+        title: "<%= j "#{r.loaner_car.name} / #{r.repair&.car&.customer&.name || '顧客なし'}" %>",
+        start: "<%= r.start_date %>",
+        end: "<%= r.end_date + 1 %>",
+        color: "<%= r.start_date <= Date.today && r.end_date >= Date.today ? '#e74c3c' : '#3498db' %>",
+        url: "<%= rental_path(r) %>"
+      }<%= "," unless r == @rentals.last %>
     <% end %>
-  </table>
-<% else %>
-  <p class="muted">現在貸出中の代車はありません。</p>
-<% end %>
+  ];
 
-<h2 class="section-title">貸出予定</h2>
+  // タブ切り替え
+  buttons.forEach(btn => {
+    btn.onclick = () => {
+      buttons.forEach(b => b.classList.remove("active"));
+      contents.forEach(c => c.classList.remove("active"));
 
-<% if @upcoming_rentals.any? %>
-  <table class="repair-table">
-    <tr>
-      <th>代車</th>
-      <th>期間</th>
-      <th>顧客</th>
-    </tr>
-    <% @upcoming_rentals.each do |r| %>
-      <tr>
-        <td><%= r.loaner_car.name %></td>
-        <td>
-          <%= r.start_date.strftime("%Y/%m/%d") %>
-          〜
-          <%= r.end_date.strftime("%Y/%m/%d") %>
-        </td>
-        <td><%= r.repair.car.customer.name %></td>
-      </tr>
-    <% end %>
-  </table>
-<% else %>
-  <p class="muted">貸出予定はありません。</p>
-<% end %>
+      btn.classList.add("active");
+      const target = document.getElementById("tab-" + btn.dataset.tab);
+      target.classList.add("active");
+
+      if (btn.dataset.tab === "calendar" && calendar) {
+        calendar.updateSize();
+      }
+    };
+  });
+
+  const calendarEl = document.getElementById("calendar");
+
+  if (calendarEl && !calendarEl.dataset.loaded) {
+    calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: "dayGridMonth",
+      locale: "ja",
+      height: "auto",
+      events: events,
+
+      // 既存レンタルクリック
+      eventClick: function(info) {
+        window.location.href = info.event.url;
+      },
+
+      // 日付クリックで新規登録
+      dateClick: function(info) {
+        window.location.href = "/rentals/new?start_date=" + info.dateStr;
+      }
+    });
+
+    calendar.render();
+    calendarEl.dataset.loaded = "true";
+  }
+
+});
+</script>

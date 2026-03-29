@@ -12,17 +12,24 @@
 <% end %>
 
 <div class="card" style="margin-bottom:20px;">
-  <p><strong>顧客名:</strong> <%= @repair.car.customer.name %></p>
-  <p>
-    <strong>車両:</strong>
-    <%= @repair.car.car_model %>（<%= @repair.car.car_number %>）
-  </p>
+  <% if @repair.present? && @repair.car.present? %>
+    <p><strong>顧客名:</strong> <%= @repair.car.customer.name %></p>
+    <p>
+      <strong>車両:</strong>
+      <%= @repair.car.car_model %>（<%= @repair.car.car_number %>）
+    </p>
+  <% else %>
+    <p>顧客情報は選択されていません。</p>
+  <% end %>
 </div>
 
 <div class="card">
   <%= form_with model: @rental, local: true do |f| %>
 
-    <%= f.hidden_field :repair_id, value: @repair.id %>
+    <%# repair_id がある場合のみ hidden_field を作る %>
+    <% if @repair.present? %>
+      <%= f.hidden_field :repair_id, value: @repair.id %>
+    <% end %>
 
     <div>
       <%= f.label :loaner_car_id, "代車選択", class: "form-label" %>
@@ -41,7 +48,11 @@
 
     <div style="margin-top:20px;">
       <%= f.submit "貸出登録", class: "btn-primary" %>
-      <%= link_to "修理詳細に戻る", repair_path(@repair), class: "btn-outline" %>
+      <% if @repair.present? %>
+        <%= link_to "修理詳細に戻る", repair_path(@repair), class: "btn-outline" %>
+      <% else %>
+        <%= link_to "代車一覧に戻る", loaner_cars_path, class: "btn-outline" %>
+      <% end %>
     </div>
 
   <% end %>

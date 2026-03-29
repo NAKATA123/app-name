@@ -1,8 +1,37 @@
 ja:
+  activerecord:
+    models:
+      repair: "修理"
+      rental: "貸出"
+      loaner_car: "代車"
+      customer: "顧客"
+    attributes:
+      repair:
+        id: "修理ID"
+        status: "状態"
+        car_id: "車両"
+      rental:
+        id: "貸出ID"
+        loaner_car_id: "代車"
+        repair_id: "修理"
+        start_date: "開始日"
+        end_date: "終了日"
+      loaner_car:
+        id: "代車ID"
+        name: "名前"
+        car_number: "ナンバー"
+      customer:
+        id: "顧客ID"
+        name: "顧客名"
+
   enums:
     repair:
       status:
-        reception: 受付中
-        working: 作業中
-        completed: 完了
-        
+        reception: "受付中"
+        working: "作業中"
+        completed: "完了"
+
+  errors:
+    messages:
+      required: "を入力してください"
+      

@@ -1,6 +1,6 @@
 class Rental < ApplicationRecord
   belongs_to :loaner_car
-  belongs_to :repair
+  belongs_to :repair, optional: true
 
   validate :no_double_booking
 

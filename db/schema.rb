@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_02_14_152316) do
+ActiveRecord::Schema[7.1].define(version: 2026_03_29_035914) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,7 +41,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_14_152316) do
 
   create_table "rentals", force: :cascade do |t|
     t.bigint "loaner_car_id", null: false
-    t.bigint "repair_id", null: false
+    t.bigint "repair_id"
     t.date "start_date"
     t.date "end_date"
     t.datetime "created_at", null: false

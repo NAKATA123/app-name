@@ -516,3 +516,19 @@ body {
 .cell-link-anchor:hover {
   color: #255c61;
 }
+
+#calendar {
+  background: #fff;
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+/* カレンダータブ */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
