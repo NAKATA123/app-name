@@ -1,6 +1,9 @@
 class RepairsController < ApplicationController
   def index
-    @repairs = Repair.includes(car: :customer).order(created_at: :desc)
+    @repairs = Repair.includes(car: :customer)
+                     .order(created_at: :desc)
+                     .page(params[:page])
+                     .per(15)
   end
 
   def show

@@ -5,9 +5,24 @@
   <p style="margin:6px 0 0; font-weight:800; font-size:16px;">
     <%= Time.zone.today.strftime("%Y/%m/%d") %>
   </p>
+
+  <div class="today-notice"
+       data-controller="today-notice"
+       data-today-notice-notice-id-value="<%= @today_notice.id || 0 %>"
+       data-today-notice-notice-date-value="<%= @today_notice.notice_date %>"
+       data-today-notice-create-url-value="<%= notices_path %>"
+       data-today-notice-update-url-value="<%= @today_notice.persisted? ? notice_path(@today_notice) : "" %>">
+    <div class="today-notice-header">
+      <p class="today-notice-title">今日の連絡事項</p>
+      <span class="today-notice-status" data-today-notice-target="status"></span>
+    </div>
+    <textarea class="today-notice-input"
+              data-today-notice-target="input"
+              data-action="input->today-notice#queueSave blur->today-notice#saveNow"
+              placeholder="ここを押して入力"><%= @today_notice.content %></textarea>
+  </div>
 </div>
 
-<!-- 修理状況 -->
 <h2 class="section-title">修理状況</h2>
 <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; margin-bottom:32px;">
   <div class="card">
@@ -26,7 +41,6 @@
   </div>
 </div>
 
-<!-- 代車状況 -->
 <h2 class="section-title">代車状況</h2>
 <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:16px;">
   <div class="card">

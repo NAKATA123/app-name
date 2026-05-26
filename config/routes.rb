@@ -21,4 +21,6 @@ Rails.application.routes.draw do
   resources :rentals, only: [:new, :create, :show]
 
   resources :users, only: [:new, :create]
+
+  resources :notices, only: [:create, :update]
 end

@@ -11,6 +11,15 @@
     </div>
   </div>
 
+  <%= search_form_for @q do |f| %>
+    <div class="search-box">
+      <%= f.search_field :name_cont,
+          placeholder: "顧客名で検索" %>
+
+      <%= f.submit "検索", class: "btn-primary" %>
+    </div>
+  <% end %>
+
   <% if @customers.any? %>
     <table class="repair-table">
       <thead>
@@ -35,6 +44,8 @@
         <% end %>
       </tbody>
     </table>
+
+    <%= paginate @customers %>
   <% else %>
     <div class="card empty-state">
       <p class="muted">顧客はまだ登録されていません。</p>

@@ -2,7 +2,8 @@ class CustomersController < ApplicationController
   before_action :require_login
 
   def index
-    @customers = Customer.all.order(created_at: :desc)
+    @q = Customer.ransack(params[:q])
+    @customers = @q.result.order(created_at: :desc).page(params[:page]).per(15)
   end
 
   def new

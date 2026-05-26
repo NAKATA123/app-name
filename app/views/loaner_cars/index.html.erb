@@ -1,17 +1,24 @@
-<div class="page-container">
+<div class="page-container"
+     data-controller="loaner-calendar"
+     data-loaner-calendar-events-value="<%= @calendar_events.to_json %>">
 
   <h1 class="page-title">代車管理</h1>
 
-  <!-- タブ -->
   <div class="tab-nav">
-    <button class="tab-btn active" data-tab="list">一覧</button>
-    <button class="tab-btn" data-tab="calendar">カレンダー</button>
+    <button class="tab-btn active"
+            data-tab="list"
+            data-loaner-calendar-target="tab"
+            data-action="loaner-calendar#switch">一覧</button>
+    <button class="tab-btn"
+            data-tab="calendar"
+            data-loaner-calendar-target="tab"
+            data-action="loaner-calendar#switch">カレンダー</button>
   </div>
 
-  <!-- =========================
-       一覧タブ
-  ========================== -->
-  <div id="tab-list" class="tab-content active">
+  <div id="tab-list"
+       class="tab-content active"
+       data-panel="list"
+       data-loaner-calendar-target="panel">
 
     <div style="margin: 20px 0;">
       <%= link_to "代車を登録する", new_loaner_car_path, class: "btn-primary" %>
@@ -91,75 +98,11 @@
 
   </div>
 
-  <!-- =========================
-       カレンダータブ
-  ========================== -->
-  <div id="tab-calendar" class="tab-content">
-    <div id="calendar"></div>
+  <div id="tab-calendar"
+       class="tab-content"
+       data-panel="calendar"
+       data-loaner-calendar-target="panel">
+    <div id="calendar" data-loaner-calendar-target="calendar"></div>
   </div>
 
 </div>
-
-<script>
-document.addEventListener("turbo:load", function () {
-
-  const buttons = document.querySelectorAll(".tab-btn");
-  const contents = document.querySelectorAll(".tab-content");
-
-  let calendar;
-
-  // 👇 カレンダー用データ
-  const events = [
-    <% @rentals.each do |r| %>
-      {
-        title: "<%= j "#{r.loaner_car.name} / #{r.repair&.car&.customer&.name || '顧客なし'}" %>",
-        start: "<%= r.start_date %>",
-        end: "<%= r.end_date + 1 %>",
-        color: "<%= r.start_date <= Date.today && r.end_date >= Date.today ? '#e74c3c' : '#3498db' %>",
-        url: "<%= rental_path(r) %>"
-      }<%= "," unless r == @rentals.last %>
-    <% end %>
-  ];
-
-  // タブ切り替え
-  buttons.forEach(btn => {
-    btn.onclick = () => {
-      buttons.forEach(b => b.classList.remove("active"));
-      contents.forEach(c => c.classList.remove("active"));
-
-      btn.classList.add("active");
-      const target = document.getElementById("tab-" + btn.dataset.tab);
-      target.classList.add("active");
-
-      if (btn.dataset.tab === "calendar" && calendar) {
-        calendar.updateSize();
-      }
-    };
-  });
-
-  const calendarEl = document.getElementById("calendar");
-
-  if (calendarEl && !calendarEl.dataset.loaded) {
-    calendar = new FullCalendar.Calendar(calendarEl, {
-      initialView: "dayGridMonth",
-      locale: "ja",
-      height: "auto",
-      events: events,
-
-      // 既存レンタルクリック
-      eventClick: function(info) {
-        window.location.href = info.event.url;
-      },
-
-      // 日付クリックで新規登録
-      dateClick: function(info) {
-        window.location.href = "/rentals/new?start_date=" + info.dateStr;
-      }
-    });
-
-    calendar.render();
-    calendarEl.dataset.loaded = "true";
-  }
-
-});
-</script>
