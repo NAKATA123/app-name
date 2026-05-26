@@ -21,9 +21,18 @@ class LoanerCarsController < ApplicationController
       .where("start_date > ?", today)
       .order(:start_date)
 
-    # カレンダー表示用（すべてのレンタルを取得）
+    # カレンダー表示
     @rentals = Rental.includes(:loaner_car, repair: { car: :customer })
-  end
+
+    @calendar_events = @rentals.map do |r|
+      {
+        title: "#{r.loaner_car.name} - #{r.repair&.car&.customer&.name}",
+        start: r.start_date,
+        end: r.end_date + 1.day,
+        url: rental_path(r)
+      }
+    end
+    end
 
   # =========================
   # 新規代車登録フォーム
