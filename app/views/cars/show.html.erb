@@ -1,19 +1,49 @@
-<h1>車両詳細</h1>
+<div class="page-container">
 
-<p>顧客名: <%= @car.customer.name %></p>
-<p>車種: <%= @car.car_model %></p>
-<p>ナンバー: <%= @car.car_number %></p>
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">車両詳細</h1>
+      <p class="muted">登録されている車両情報です</p>
+    </div>
 
-<hr>
+    <div class="page-actions">
+      <%= link_to "＋ 修理追加",
+          new_customer_car_repair_path(@car.customer, @car),
+          class: "btn-primary" %>
 
-<%= link_to "＋修理追加",
-            new_customer_car_repair_path(@car.customer, @car) %>
+      <%= link_to "編集",
+          edit_customer_car_path(@car.customer, @car),
+          class: "btn-outline" %>
 
-<%= link_to "編集",
-            edit_customer_car_path(@car.customer, @car) %> |
+      <%= link_to "削除",
+          customer_car_path(@car.customer, @car),
+          class: "btn-danger",
+          data: {
+            turbo_method: :delete,
+            turbo_confirm: "本当に削除しますか？"
+          } %>
+    </div>
+  </div>
 
-<%= link_to "削除",
-            customer_car_path(@car.customer, @car),
-            data: { turbo_method: :delete,
-                    turbo_confirm: "本当に削除しますか？" } %>
-                    
+  <div class="card detail-card">
+    <div class="detail-list">
+
+      <div class="detail-row">
+        <p class="detail-label">顧客名</p>
+        <p class="detail-value"><%= @car.customer.name %></p>
+      </div>
+
+      <div class="detail-row">
+        <p class="detail-label">車種</p>
+        <p class="detail-value"><%= @car.car_model %></p>
+      </div>
+
+      <div class="detail-row">
+        <p class="detail-label">ナンバー</p>
+        <p class="detail-value"><%= @car.car_number %></p>
+      </div>
+
+    </div>
+  </div>
+
+</div>

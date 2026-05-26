@@ -26,7 +26,8 @@ class CarsController < ApplicationController
   def update
     @car = Car.find(params[:id])
     if @car.update(car_params)
-      redirect_to car_path(@car), notice: "車両情報を更新しました"
+      redirect_to customer_car_path(@car.customer, @car),
+            notice: "車両情報を更新しました"
     else
       render :edit, status: :unprocessable_entity
     end
