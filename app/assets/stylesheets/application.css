@@ -3,9 +3,7 @@
  *= require_self
 */
 
-/* =========================
-   Base
-========================= */
+/* ===== Base ===== */
 
 * { box-sizing: border-box; }
 
@@ -16,9 +14,7 @@ body {
   font-family: 'Inter', 'IBM Plex Sans JP', sans-serif;
 }
 
-/* =========================
-   Status Badge
-========================= */
+/* ===== Status Badge ===== */
 
 .status-badge {
   padding: 4px 8px;
@@ -32,9 +28,7 @@ body {
 .status-badge.working   { background-color: #007bff; }
 .status-badge.completed { background-color: #28a745; }
 
-/* =========================
-   Header
-========================= */
+/* ===== Header ===== */
 
 .app-header {
   background: #6f9aa0;
@@ -53,6 +47,7 @@ body {
 }
 
 /* nav */
+
 .nav {
   display: flex;
   gap: 12px;
@@ -61,6 +56,7 @@ body {
 }
 
 /* nav links */
+
 .nav-link {
   color: #fff;
   text-decoration: none;
@@ -78,11 +74,13 @@ body {
 }
 
 /* underline animation OFF */
+
 .nav-link::after {
   display: none;
 }
 
 /* active tab */
+
 .nav-link.active {
   background: rgba(255,255,255,0.18);
   color: #fff;
@@ -112,9 +110,7 @@ body {
   color: #6f9aa0;
 }
 
-/* =========================
-   Titles
-========================= */
+/* ===== Titles ===== */
 
 .page-title {
   font-size: 28px;
@@ -132,9 +128,7 @@ body {
   color: #777;
 }
 
-/* =========================
-   Table (Card Style)
-========================= */
+/* ===== Table ===== */
 
 .repair-table {
   width: 100%;
@@ -163,9 +157,7 @@ body {
   background: #f9fbfd;
 }
 
-/* =========================
-   Buttons
-========================= */
+/* ===== Buttons ===== */
 
 .btn-primary {
   display: inline-block;
@@ -222,9 +214,7 @@ body {
   border-color: #b02a37;
 }
 
-/* =========================
-   Card (for forms)
-========================= */
+/* ===== Card ===== */
 
 .card {
   background: #fff;
@@ -234,9 +224,7 @@ body {
   box-shadow: 0 8px 20px rgba(0,0,0,0.06);
 }
 
-/* =========================
-   Form
-========================= */
+/* ===== Form ===== */
 
 .form-label {
   font-weight: 700;
@@ -259,9 +247,7 @@ body {
   min-height: 120px;
 }
 
-/* =========================
-   Dashboard Notice
-========================= */
+/* ===== Dashboard Notice ===== */
 
 .today-notice {
   margin-top: 18px;
@@ -301,8 +287,14 @@ body {
   color: #0f172a;
   font: inherit;
   line-height: 1.7;
-  resize: vertical;
-  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  resize: none;
+  overflow: hidden;
+
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s,
+    background 0.2s,
+    height 0.1s ease;
 }
 
 .today-notice-input:focus {
@@ -312,9 +304,7 @@ body {
   box-shadow: 0 0 0 4px rgba(111, 154, 160, 0.15);
 }
 
-/* =========================
-   Login
-========================= */
+/* ===== Login ===== */
 
 .login-page {
   min-height: calc(100vh - 64px);
@@ -322,6 +312,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 32px 16px;
+
   background:
     radial-gradient(circle at top left, rgba(111, 154, 160, 0.16), transparent 35%),
     radial-gradient(circle at bottom right, rgba(47, 111, 117, 0.10), transparent 30%),
@@ -424,6 +415,8 @@ body {
   text-decoration: underline;
 }
 
+/* ===== Mobile ===== */
+
 @media (max-width: 540px) {
   .login-card {
     padding: 28px 20px;
@@ -435,9 +428,7 @@ body {
   }
 }
 
-/* =========================
-   Page Layout / Detail
-========================= */
+/* ===== Page Layout ===== */
 
 .page-container {
   max-width: 960px;
@@ -521,9 +512,7 @@ body {
   padding: 24px;
 }
 
-/* =========================
-   Responsive
-========================= */
+/* ===== Responsive ===== */
 
 @media (max-width: 640px) {
   .detail-list {
@@ -548,9 +537,8 @@ body {
   }
 }
 
-/* =========================
-   Table Cell Link
-========================= */
+/* ===== Table Cell Link ===== */
+
 .cell-link {
   padding: 0 !important;
 }
@@ -570,6 +558,8 @@ body {
   color: #255c61;
 }
 
+/* ===== Calendar ===== */
+
 #calendar {
   background: #fff;
   padding: 16px;
@@ -577,7 +567,8 @@ body {
   box-shadow: 0 8px 20px rgba(0,0,0,0.06);
 }
 
-/* カレンダータブ */
+/* ===== Calendar Tabs ===== */
+
 .tab-content {
   display: none;
 }

@@ -11,9 +11,12 @@ export default class extends Controller {
 
   connect() {
     this.saveTimer = null
+    this.resize()
   }
 
   queueSave() {
+    this.resize()
+
     this.setStatus("編集中")
     clearTimeout(this.saveTimer)
     this.saveTimer = setTimeout(() => this.save(), 700)
@@ -24,8 +27,16 @@ export default class extends Controller {
     this.save()
   }
 
+  resize() {
+    const textarea = this.inputTarget
+
+    textarea.style.height = "auto"
+    textarea.style.height = `${textarea.scrollHeight}px`
+  }
+
   async save() {
     const content = this.inputTarget.value
+
     const response = await fetch(this.url, {
       method: this.method,
       headers: {
