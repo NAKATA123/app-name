@@ -1,4 +1,4 @@
-<h1 class="page-title">代車登録</h1>
+<h1 class="page-title">代車編集</h1>
 
 <div class="card">
   <%= form_with model: @loaner_car, local: true do |f| %>
@@ -18,8 +18,11 @@
     </div>
 
     <div class="form-actions">
-      <%= f.submit "登録する", class: "btn-primary" %>
+      <%= f.submit "更新する", class: "btn-primary" %>
       <%= link_to "戻る", loaner_cars_path, class: "btn-outline" %>
+      <%= link_to "削除", loaner_car_path(@loaner_car),
+            data: { turbo_method: :delete, turbo_confirm: "#{@loaner_car.name}を削除しますか？" },
+            class: "btn-danger" %>
     </div>
   <% end %>
 </div>

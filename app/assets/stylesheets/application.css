@@ -422,6 +422,9 @@ body {
 .repair-table tr:last-child td { border-bottom: none; }
 .repair-table tbody tr:hover { background: #f8fafc; }
 
+.table-row-link { cursor: pointer; }
+.table-row-link:hover { background: #f0f8fa !important; }
+
 /* ===== Buttons ===== */
 
 .btn-primary {

@@ -12,5 +12,6 @@ class HomeController < ApplicationController
 
     @today_notice = Notice.find_by(notice_date: today) || Notice.new(notice_date: today)
     @expiring_cars = Car.expiring_soon.includes(:customer)
+    @expiring_loaner_cars = LoanerCar.expiring_soon
   end
 end

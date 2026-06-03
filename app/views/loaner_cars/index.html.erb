@@ -33,21 +33,36 @@
     </div>
 
     <table class="repair-table">
-      <tr>
-        <th>名前</th>
-        <th>ナンバー</th>
-        <th>貸出履歴</th>
-      </tr>
-
-      <% @loaner_cars.each do |car| %>
+      <thead>
         <tr>
-          <td><%= car.name %></td>
-          <td><%= car.car_number %></td>
-          <td>
-            <%= link_to "詳細", loaner_car_rentals_path(car), class: "btn-outline" %>
-          </td>
+          <th>名前</th>
+          <th>ナンバー</th>
+          <th>車検期限</th>
         </tr>
-      <% end %>
+      </thead>
+      <tbody>
+        <% @loaner_cars.each do |car| %>
+          <tr class="table-row-link" onclick="location.href='<%= edit_loaner_car_path(car) %>'">
+            <td><%= car.name %></td>
+            <td><%= car.car_number %></td>
+            <td>
+              <% if car.shaken_expiry_date %>
+                <% days = (car.shaken_expiry_date - Time.zone.today).to_i %>
+                <%= car.shaken_expiry_date.strftime("%Y/%m/%d") %>
+                <% if days < 0 %>
+                  <span class="shaken-badge shaken-expired">期限切れ</span>
+                <% elsif days <= 30 %>
+                  <span class="shaken-badge shaken-soon">あと<%= days %>日</span>
+                <% elsif days <= 90 %>
+                  <span class="shaken-badge shaken-warning">あと<%= days %>日</span>
+                <% end %>
+              <% else %>
+                <span class="muted">未登録</span>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
     </table>
 
     <hr class="section-divider">

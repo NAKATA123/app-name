@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   resources :repairs, only: [:index]
 
-  resources :loaner_cars, only: [:index, :new, :create] do
+  resources :loaner_cars, only: [:index, :new, :create, :edit, :update, :destroy] do
     resources :rentals, only: [:index]
   end
 
