@@ -14,18 +14,48 @@ body {
   font-family: 'Inter', 'IBM Plex Sans JP', sans-serif;
 }
 
+/* ===== Animations ===== */
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes tireSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes workingPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(59,130,246,0.4); }
+  50%       { box-shadow: 0 0 0 4px rgba(59,130,246,0); }
+}
+
+@keyframes carRace {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  25%       { transform: translateX(8px) rotate(-2deg); }
+  75%       { transform: translateX(-8px) rotate(2deg); }
+}
+
+@keyframes speedLine {
+  0%   { left: -250px; opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.6; }
+  100% { left: 110%; opacity: 0; }
+}
+
 /* ===== Flash ===== */
 
 .flash {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   padding: 11px 16px;
   border-radius: 8px;
   font-size: 13px;
   font-weight: 600;
   margin-bottom: 16px;
   animation: fadeInDown 0.2s ease;
-  display: flex;
-  align-items: center;
-  gap: 8px;
 }
 
 .flash::before {
@@ -37,26 +67,10 @@ body {
   flex-shrink: 0;
 }
 
-.flash-notice {
-  background: #ecfdf5;
-  border: 1px solid #6ee7b7;
-  color: #065f46;
-}
-
+.flash-notice { background: #ecfdf5; border: 1px solid #6ee7b7; color: #065f46; }
 .flash-notice::before { background: #10b981; }
-
-.flash-alert {
-  background: #fff1f2;
-  border: 1px solid #fecdd3;
-  color: #be123c;
-}
-
-.flash-alert::before { background: #f43f5e; }
-
-@keyframes fadeInDown {
-  from { opacity: 0; transform: translateY(-8px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+.flash-alert  { background: #fff1f2; border: 1px solid #fecdd3; color: #be123c; }
+.flash-alert::before  { background: #f43f5e; }
 
 /* ===== Status Badge ===== */
 
@@ -80,32 +94,14 @@ body {
   flex-shrink: 0;
 }
 
-.status-badge.reception {
-  background: #fff7ed;
-  color: #c2410c;
-  border: 1.5px solid #fb923c;
-}
+.status-badge.reception { background: #fff7ed; color: #c2410c; border: 1.5px solid #fb923c; }
 .status-badge.reception::before { background: #f97316; }
 
-.status-badge.working {
-  background: #eff6ff;
-  color: #1d4ed8;
-  border: 1.5px solid #60a5fa;
-  animation: workingPulse 2s ease-in-out infinite;
-}
+.status-badge.working { background: #eff6ff; color: #1d4ed8; border: 1.5px solid #60a5fa; animation: workingPulse 2s ease-in-out infinite; }
 .status-badge.working::before { background: #3b82f6; }
 
-.status-badge.completed {
-  background: #f0fdf4;
-  color: #15803d;
-  border: 1.5px solid #4ade80;
-}
+.status-badge.completed { background: #f0fdf4; color: #15803d; border: 1.5px solid #4ade80; }
 .status-badge.completed::before { background: #22c55e; }
-
-@keyframes workingPulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(59,130,246,0.4); }
-  50%       { box-shadow: 0 0 0 4px rgba(59,130,246,0); }
-}
 
 /* ===== Header ===== */
 
@@ -117,14 +113,11 @@ body {
   box-shadow: 0 4px 24px rgba(0,0,0,0.5);
 }
 
-/* チェッカーフラッグ ボトムボーダー */
 .app-header::after {
   content: '';
   display: block;
   height: 5px;
-  background:
-    repeating-conic-gradient(#1e8a9a 0% 25%, #0a1a20 0% 50%)
-    0 0 / 10px 10px;
+  background: repeating-conic-gradient(#1e8a9a 0% 25%, #0a1a20 0% 50%) 0 0 / 10px 10px;
 }
 
 .header-inner {
@@ -134,18 +127,12 @@ body {
   padding: 0 16px;
   display: flex;
   align-items: center;
-  gap: 0;
-  /* 斜めストライプのサブテクスチャ */
   background: repeating-linear-gradient(
     -60deg,
-    transparent 0px,
-    transparent 18px,
-    rgba(30,138,154,0.04) 18px,
-    rgba(30,138,154,0.04) 36px
+    transparent 0px, transparent 18px,
+    rgba(30,138,154,0.04) 18px, rgba(30,138,154,0.04) 36px
   );
 }
-
-/* Brand */
 
 .brand-link {
   display: flex;
@@ -155,10 +142,7 @@ body {
   flex-shrink: 0;
 }
 
-.brand-logo {
-  height: 32px;
-  width: auto;
-}
+.brand-logo  { height: 32px; width: auto; }
 
 .brand-name {
   font-size: 15px;
@@ -168,8 +152,6 @@ body {
   text-transform: uppercase;
 }
 
-/* Divider */
-
 .header-divider {
   width: 1px;
   height: 22px;
@@ -178,8 +160,6 @@ body {
   flex-shrink: 0;
 }
 
-/* Nav */
-
 .nav {
   display: flex;
   gap: 2px;
@@ -187,11 +167,7 @@ body {
   flex: 1;
 }
 
-.nav-flag {
-  font-size: 14px;
-  margin-right: 6px;
-  opacity: 0.7;
-}
+.nav-flag { font-size: 14px; margin-right: 6px; opacity: 0.7; }
 
 .nav-link {
   position: relative;
@@ -204,13 +180,10 @@ body {
   transition: color 0.15s;
 }
 
-.nav-link::after { display: none; }
-
-/* アンダーラインアニメーション */
 .nav-link::before {
   content: '';
   position: absolute;
-  bottom: -5px; /* チェッカーの上 */
+  bottom: -5px;
   left: 50%;
   transform: translateX(-50%);
   width: 0;
@@ -219,24 +192,10 @@ body {
   transition: width 0.2s ease;
 }
 
-.nav-link:hover {
-  color: rgba(255,255,255,0.90);
-}
-
-.nav-link:hover::before {
-  width: 70%;
-}
-
-.nav-link.active {
-  color: #00d2be;
-  font-weight: 700;
-}
-
-.nav-link.active::before {
-  width: 100%;
-}
-
-/* Header Right */
+.nav-link:hover { color: rgba(255,255,255,0.90); }
+.nav-link:hover::before { width: 70%; }
+.nav-link.active { color: #00d2be; font-weight: 700; }
+.nav-link.active::before { width: 100%; }
 
 .header-right {
   display: flex;
@@ -279,71 +238,56 @@ body {
 /* ===== Titles ===== */
 
 .page-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-size: 22px;
   font-weight: 800;
   margin: 24px 0 4px;
   color: #0f172a;
   letter-spacing: -0.01em;
-  display: flex;
-  align-items: center;
-  gap: 10px;
 }
 
-/* タイヤアイコン（Cars風） */
 .page-title::before {
   content: '';
   display: inline-block;
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background:
-    radial-gradient(circle,
-      #f0f0f0  0%,  #f0f0f0  13%,   /* ハブ（シルバー） */
-      #e10600  13%, #e10600  38%,   /* リム（カーズ赤） */
-      #1a1a1a  38%, #1a1a1a  46%,   /* タイヤ内側 */
-      #3a3a3a  46%, #3a3a3a  52%,   /* トレッド溝 */
-      #1a1a1a  52%, #1a1a1a  100%   /* タイヤ外側 */
-    );
-  box-shadow:
-    0 3px 8px rgba(0,0,0,0.45),
-    inset 0 1px 2px rgba(255,255,255,0.2);
   flex-shrink: 0;
+  background: radial-gradient(circle,
+    #f0f0f0  0%,  #f0f0f0  13%,
+    #e10600  13%, #e10600  38%,
+    #1a1a1a  38%, #1a1a1a  46%,
+    #3a3a3a  46%, #3a3a3a  52%,
+    #1a1a1a  52%, #1a1a1a  100%
+  );
+  box-shadow: 0 3px 8px rgba(0,0,0,0.45), inset 0 1px 2px rgba(255,255,255,0.2);
   animation: tireSpin 4s linear infinite;
 }
 
-@keyframes tireSpin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-
 .section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 14px;
   font-weight: 800;
   margin: 28px 0 12px;
   color: #334155;
   letter-spacing: 0.03em;
-  display: flex;
-  align-items: center;
-  gap: 8px;
 }
 
-/* チェッカーフラッグ風 section アクセント */
 .section-title::before {
   content: '';
   display: inline-block;
   width: 12px;
   height: 12px;
-  background:
-    repeating-conic-gradient(#1e8a9a 0% 25%, #0f172a 0% 50%)
-    0 0 / 6px 6px;
-  border-radius: 2px;
   flex-shrink: 0;
+  background: repeating-conic-gradient(#1e8a9a 0% 25%, #0f172a 0% 50%) 0 0 / 6px 6px;
+  border-radius: 2px;
 }
 
-.muted {
-  color: #64748b;
-  font-size: 13px;
-}
+.muted { color: #64748b; font-size: 13px; }
 
 /* ===== ダッシュボード stat カード ===== */
 
@@ -392,28 +336,21 @@ body {
 
 .filter-btn:hover { border-color: #94a3b8; color: #1e293b; }
 
-.filter-btn.active {
-  background: #0f172a;
-  border-color: #0f172a;
-  color: #fff;
-}
-
-.filter-btn.reception.active { background: #c2410c; border-color: #c2410c; }
-.filter-btn.working.active   { background: #1d4ed8; border-color: #1d4ed8; }
-.filter-btn.completed.active { background: #15803d; border-color: #15803d; }
+.filter-btn.active             { background: #0f172a; border-color: #0f172a; color: #fff; }
+.filter-btn.reception.active   { background: #c2410c; border-color: #c2410c; }
+.filter-btn.working.active     { background: #1d4ed8; border-color: #1d4ed8; }
+.filter-btn.completed.active   { background: #15803d; border-color: #15803d; }
 
 .filter-count {
-  background: rgba(255,255,255,0.25);
+  background: #f1f5f9;
+  color: #64748b;
   padding: 1px 6px;
   border-radius: 999px;
   font-size: 11px;
   font-weight: 800;
 }
 
-.filter-btn:not(.active) .filter-count {
-  background: #f1f5f9;
-  color: #64748b;
-}
+.filter-btn.active .filter-count { background: rgba(255,255,255,0.25); color: inherit; }
 
 /* ===== ワンクリックステータス変更 ===== */
 
@@ -438,7 +375,6 @@ body {
   border-radius: 7px;
   font-size: 12px;
   font-weight: 700;
-  border: none;
   cursor: pointer;
   transition: 0.15s, transform 0.1s;
   letter-spacing: 0.02em;
@@ -446,24 +382,11 @@ body {
 
 .btn-status-next:hover { transform: translateY(-1px); }
 
-.btn-status-working {
-  background: #dbeafe;
-  color: #1d4ed8;
-  border: 1.5px solid #60a5fa;
-}
-.btn-status-working:hover { background: #bfdbfe; }
-
-.btn-status-completed {
-  background: #dcfce7;
-  color: #15803d;
-  border: 1.5px solid #4ade80;
-}
+.btn-status-working   { background: #dbeafe; color: #1d4ed8; border: 1.5px solid #60a5fa; }
+.btn-status-working:hover   { background: #bfdbfe; }
+.btn-status-completed { background: #dcfce7; color: #15803d; border: 1.5px solid #4ade80; }
 .btn-status-completed:hover { background: #bbf7d0; }
-
-.btn-status-lg {
-  padding: 8px 18px;
-  font-size: 14px;
-}
+.btn-status-lg { padding: 8px 18px; font-size: 14px; }
 
 /* ===== Table ===== */
 
@@ -497,7 +420,6 @@ body {
 }
 
 .repair-table tr:last-child td { border-bottom: none; }
-
 .repair-table tbody tr:hover { background: #f8fafc; }
 
 /* ===== Buttons ===== */
@@ -515,7 +437,6 @@ body {
   border: 1px solid #00d2be;
   cursor: pointer;
   transition: background 0.15s, box-shadow 0.15s, transform 0.1s;
-  box-shadow: 0 0 0 0 rgba(0,210,190,0);
 }
 
 .btn-primary:hover {
@@ -539,11 +460,7 @@ body {
   background: #fff;
 }
 
-.btn-outline:hover {
-  border-color: #94a3b8;
-  color: #1e293b;
-  background: #f8fafc;
-}
+.btn-outline:hover { border-color: #94a3b8; color: #1e293b; background: #f8fafc; }
 
 .btn-danger {
   display: inline-block;
@@ -559,11 +476,7 @@ body {
   transition: 0.15s;
 }
 
-.btn-danger:hover {
-  background: #dc2626;
-  border-color: #dc2626;
-  color: #fff;
-}
+.btn-danger:hover { background: #dc2626; border-color: #dc2626; color: #fff; }
 
 /* ===== Card ===== */
 
@@ -577,29 +490,22 @@ body {
   overflow: hidden;
 }
 
-/* カード左上のレーシングストライプ */
 .card::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   height: 3px;
-  background: repeating-linear-gradient(
-    90deg,
-    #00d2be 0px, #00d2be 6px,
-    #0a1a20 6px, #0a1a20 12px
-  );
+  background: repeating-linear-gradient(90deg, #00d2be 0px, #00d2be 6px, #0a1a20 6px, #0a1a20 12px);
   border-radius: 10px 10px 0 0;
 }
 
 /* ===== Form ===== */
 
 .form-label {
+  display: block;
   font-weight: 700;
   font-size: 12px;
   color: #64748b;
-  display: block;
   margin: 14px 0 6px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -636,8 +542,7 @@ body {
   margin-bottom: 20px;
 }
 
-.search-box input[type="search"],
-.search-box input[type="text"] {
+.search-box input {
   flex: 1;
   padding: 9px 14px;
   border: 1px solid #e2e8f0;
@@ -658,35 +563,13 @@ body {
 
 .card-mb { margin-bottom: 20px; }
 
-.card-error {
-  margin-bottom: 20px;
-  border-color: #fca5a5;
-  background: #fff1f2;
-}
-
-.card-error-title {
-  font-weight: 800;
-  margin: 0 0 8px;
-  color: #be123c;
-  font-size: 14px;
-}
-
-.card-error-list {
-  margin: 0;
-  padding-left: 18px;
-  color: #be123c;
-  font-size: 14px;
-}
+.card-error { margin-bottom: 20px; border-color: #fca5a5; background: #fff1f2; }
+.card-error-title { font-weight: 800; margin: 0 0 8px; color: #be123c; font-size: 14px; }
+.card-error-list  { margin: 0; padding-left: 18px; color: #be123c; font-size: 14px; }
 
 .form-actions { margin-top: 20px; }
-
-.list-action { margin: 20px 0; }
-
-.section-divider {
-  margin: 40px 0;
-  border: none;
-  border-top: 1px solid #e2e8f0;
-}
+.list-action  { margin: 20px 0; }
+.section-divider { margin: 40px 0; border: none; border-top: 1px solid #e2e8f0; }
 
 /* ===== 車検アナウンス ===== */
 
@@ -707,14 +590,8 @@ body {
   margin-bottom: 12px;
 }
 
-.shaken-alert-icon { font-size: 16px; }
-
-.shaken-alert-title {
-  font-weight: 800;
-  font-size: 14px;
-  color: #92400e;
-  flex: 1;
-}
+.shaken-alert-icon  { font-size: 16px; }
+.shaken-alert-title { font-weight: 800; font-size: 14px; color: #92400e; flex: 1; }
 
 .shaken-alert-count {
   font-size: 12px;
@@ -746,16 +623,10 @@ body {
   flex-wrap: wrap;
 }
 
-.shaken-alert-name {
-  font-weight: 700;
-  color: #1a6570;
-  min-width: 80px;
-  text-decoration: none;
-}
-
-.shaken-alert-name:hover {
-  text-decoration: underline;
-}
+.shaken-alert-name { font-weight: 700; color: #1a6570; min-width: 80px; text-decoration: none; }
+.shaken-alert-name:hover { text-decoration: underline; }
+.shaken-alert-car  { color: #475569; flex: 1; }
+.shaken-alert-date { color: #64748b; font-size: 12px; }
 
 .shaken-edit-btn {
   margin-left: auto;
@@ -771,13 +642,7 @@ body {
   transition: 0.15s;
 }
 
-.shaken-edit-btn:hover {
-  background: #fde68a;
-}
-
-.shaken-alert-car { color: #475569; flex: 1; }
-
-.shaken-alert-date { color: #64748b; font-size: 12px; }
+.shaken-edit-btn:hover { background: #fde68a; }
 
 .shaken-badge {
   display: inline-block;
@@ -809,22 +674,8 @@ body {
   margin-bottom: 8px;
 }
 
-.today-notice-title {
-  margin: 0;
-  font-weight: 700;
-  font-size: 12px;
-  color: #64748b;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.today-notice-status {
-  min-height: 18px;
-  color: #94a3b8;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-}
+.today-notice-title  { margin: 0; font-weight: 700; font-size: 12px; color: #64748b; text-transform: uppercase; letter-spacing: 0.08em; }
+.today-notice-status { min-height: 18px; color: #94a3b8; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; }
 
 .today-notice-input {
   display: block;
@@ -858,16 +709,10 @@ body {
   align-items: stretch;
 }
 
-/* ---- 左パネル ---- */
-
 .login-deco {
   flex: 1;
   background-color: #060f12;
-  background-image:
-    repeating-conic-gradient(
-      rgba(0,210,190,0.07) 0% 25%,
-      transparent 0% 50%
-    );
+  background-image: repeating-conic-gradient(rgba(0,210,190,0.07) 0% 25%, transparent 0% 50%);
   background-size: 28px 28px;
   position: relative;
   overflow: hidden;
@@ -876,17 +721,12 @@ body {
   justify-content: center;
 }
 
-/* レーシングストライプ（右端の斜め） */
 .login-deco::after {
   content: '';
   position: absolute;
   top: 0; right: -30px; bottom: 0;
   width: 60px;
-  background: repeating-linear-gradient(
-    -10deg,
-    #00d2be 0px, #00d2be 10px,
-    #0a1a20 10px, #0a1a20 20px
-  );
+  background: repeating-linear-gradient(-10deg, #00d2be 0px, #00d2be 10px, #0a1a20 10px, #0a1a20 20px);
   opacity: 0.6;
 }
 
@@ -901,15 +741,9 @@ body {
   font-size: 80px;
   line-height: 1;
   margin-bottom: 24px;
-  animation: carRace 3s ease-in-out infinite;
   display: block;
   filter: drop-shadow(0 0 20px rgba(0,210,190,0.4));
-}
-
-@keyframes carRace {
-  0%, 100% { transform: translateX(0) rotate(0deg); }
-  25%       { transform: translateX(8px) rotate(-2deg); }
-  75%       { transform: translateX(-8px) rotate(2deg); }
+  animation: carRace 3s ease-in-out infinite;
 }
 
 .login-deco-brand {
@@ -929,28 +763,15 @@ body {
   letter-spacing: 0.06em;
 }
 
-.login-deco-flags {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  font-size: 20px;
-  margin-bottom: 28px;
-}
+.login-deco-flags { display: flex; gap: 12px; justify-content: center; font-size: 20px; margin-bottom: 28px; }
 
-/* スピードライン */
-.speed-lines {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
+.speed-lines { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
 
 .speed-lines span {
   position: absolute;
   left: -200px;
   height: 1px;
   background: linear-gradient(90deg, transparent, #00d2be, transparent);
-  border-radius: 1px;
   animation: speedLine 2.5s linear infinite;
   opacity: 0;
 }
@@ -962,34 +783,18 @@ body {
 .speed-lines span:nth-child(5) { top: 75%; width: 140px; animation-delay: 0.2s; animation-duration: 2.8s; }
 .speed-lines span:nth-child(6) { top: 85%; width: 220px; animation-delay: 1.7s; animation-duration: 1.9s; }
 
-@keyframes speedLine {
-  0%   { left: -250px; opacity: 0; }
-  10%  { opacity: 1; }
-  90%  { opacity: 0.6; }
-  100% { left: 110%; opacity: 0; }
-}
-
-/* タイヤ装飾 */
 .deco-tire {
   position: absolute;
   width: 120px;
   height: 120px;
   border-radius: 50%;
   border: 22px solid rgba(0,210,190,0.08);
-  background:
-    radial-gradient(circle, rgba(0,210,190,0.05) 30%, transparent 30%);
+  background: radial-gradient(circle, rgba(0,210,190,0.05) 30%, transparent 30%);
   animation: tireSpin 8s linear infinite;
 }
 
 .deco-tire--tl { top: -40px; left: -40px; }
 .deco-tire--br { bottom: -40px; right: -40px; animation-direction: reverse; }
-
-@keyframes tireSpin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-
-/* ---- 右パネル（フォーム） ---- */
 
 .login-panel {
   width: 420px;
@@ -1000,41 +805,16 @@ body {
   justify-content: center;
   flex-shrink: 0;
   border-left: 4px solid transparent;
-  border-image:
-    repeating-conic-gradient(#00d2be 0% 25%, #0a1a20 0% 50%)
-    0 0 / 12px 12px
-    1;
+  border-image: repeating-conic-gradient(#00d2be 0% 25%, #0a1a20 0% 50%) 0 0 / 12px 12px 1;
 }
 
-.login-form-wrap {
-  width: 100%;
-  padding: 48px 40px;
-}
+.login-form-wrap { width: 100%; padding: 48px 40px; }
 
-.login-header {
-  text-align: center;
-  margin-bottom: 32px;
-}
+.login-header { text-align: center; margin-bottom: 32px; }
+.login-logo   { height: 48px; width: auto; margin-bottom: 16px; }
 
-.login-logo {
-  height: 48px;
-  width: auto;
-  margin-bottom: 16px;
-}
-
-.login-title {
-  margin: 0 0 6px;
-  font-size: 24px;
-  font-weight: 800;
-  color: #0f172a;
-  letter-spacing: 0.01em;
-}
-
-.login-subtitle {
-  margin: 0;
-  color: #64748b;
-  font-size: 14px;
-}
+.login-title    { margin: 0 0 6px; font-size: 24px; font-weight: 800; color: #0f172a; letter-spacing: 0.01em; }
+.login-subtitle { margin: 0; color: #64748b; font-size: 14px; }
 
 .login-alert {
   margin-bottom: 20px;
@@ -1052,21 +832,12 @@ body {
   gap: 16px;
 }
 
-.login-form .form-label {
-  margin-top: 0;
-  margin-bottom: 6px;
-}
+.login-form .form-label { margin-top: 0; margin-bottom: 6px; }
 
 .login-form .form-input {
   height: 46px;
   border-radius: 8px;
   border: 1.5px solid #e2e8f0;
-  transition: border-color 0.15s, box-shadow 0.15s;
-}
-
-.login-form .form-input:focus {
-  border-color: #00d2be;
-  box-shadow: 0 0 0 3px rgba(0,210,190,0.15);
 }
 
 .login-btn {
@@ -1080,43 +851,24 @@ body {
   cursor: pointer;
 }
 
-.login-register {
-  text-align: center;
-  margin: 20px 0 0;
-  color: #64748b;
-  font-size: 13px;
-}
-
-.login-link {
-  color: #0d8a95;
-  font-weight: 700;
-  text-decoration: none;
-}
-
+.login-register { text-align: center; margin: 20px 0 0; color: #64748b; font-size: 13px; }
+.login-link     { color: #0d8a95; font-weight: 700; text-decoration: none; }
 .login-link:hover { text-decoration: underline; }
 
-/* ---- Mobile ---- */
 @media (max-width: 768px) {
-  .login-page   { flex-direction: column; }
-  .login-deco   {
-    min-height: 220px;
-    flex: none;
-  }
+  .login-page { flex-direction: column; }
+  .login-deco { min-height: 220px; flex: none; }
   .login-deco::after { display: none; }
   .login-deco-car { font-size: 56px; margin-bottom: 12px; }
   .login-deco-brand { font-size: 20px; }
   .login-deco-tagline { display: none; }
-  .login-panel  { width: 100%; min-height: auto; border-left: none; border-top: 4px solid #00d2be; }
+  .login-panel { width: 100%; min-height: auto; border-left: none; border-top: 4px solid #00d2be; }
   .login-form-wrap { padding: 32px 24px; }
 }
 
 /* ===== Page Layout ===== */
 
-.page-container {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 24px 16px 48px;
-}
+.page-container { max-width: 960px; margin: 0 auto; padding: 24px 16px 48px; }
 
 .page-header {
   display: flex;
@@ -1129,23 +881,14 @@ body {
 
 .page-header .page-title { margin: 0 0 4px; }
 
-.page-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
+.page-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 
-.empty-state {
-  text-align: center;
-  padding: 32px 24px;
-}
+.empty-state { text-align: center; padding: 32px 24px; }
 
 /* ===== Tab ===== */
 
 .tab-nav {
   display: flex;
-  gap: 0;
   margin-bottom: 20px;
   border-bottom: 1px solid #e2e8f0;
 }
@@ -1166,13 +909,9 @@ body {
 }
 
 .tab-btn:hover { color: #1a6570; }
+.tab-btn.active { color: #0d8a95; border-bottom-color: #00d2be; }
 
-.tab-btn.active {
-  color: #0d8a95;
-  border-bottom-color: #00d2be;
-}
-
-.tab-content { display: none; }
+.tab-content        { display: none; }
 .tab-content.active { display: block; }
 
 /* ===== Calendar ===== */
@@ -1187,7 +926,7 @@ body {
 
 /* ===== Detail Layout ===== */
 
-.detail-card   { margin-bottom: 24px; }
+.detail-card { margin-bottom: 24px; }
 
 .detail-list {
   display: grid;
@@ -1202,24 +941,8 @@ body {
   border-radius: 8px;
 }
 
-.detail-label {
-  margin: 0 0 4px;
-  font-size: 11px;
-  font-weight: 700;
-  color: #94a3b8;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.detail-value {
-  margin: 0;
-  font-size: 14px;
-  font-weight: 600;
-  color: #0f172a;
-  line-height: 1.6;
-  white-space: pre-wrap;
-  word-break: break-word;
-}
+.detail-label { margin: 0 0 4px; font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.08em; }
+.detail-value { margin: 0; font-size: 14px; font-weight: 600; color: #0f172a; line-height: 1.6; white-space: pre-wrap; word-break: break-word; }
 
 .section-block  { margin-top: 28px; }
 
@@ -1254,15 +977,11 @@ body {
 /* ===== Mobile ===== */
 
 @media (max-width: 640px) {
-  .brand-name  { display: none; }
+  .brand-name     { display: none; }
   .header-divider { margin: 0 12px; }
-  .nav-flag { display: none; }
-  .detail-list { grid-template-columns: 1fr; }
+  .nav-flag       { display: none; }
+  .detail-list    { grid-template-columns: 1fr; }
   .page-actions,
   .section-header .page-actions { width: 100%; }
-  .repair-table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-  }
+  .repair-table   { display: block; overflow-x: auto; white-space: nowrap; }
 }
