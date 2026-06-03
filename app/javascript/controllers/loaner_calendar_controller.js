@@ -26,8 +26,20 @@ export default class extends Controller {
         initialView: "dayGridMonth",
         locale: "ja",
         height: "auto",
+        firstDay: 1,
+        nowIndicator: true,
+        dayMaxEvents: 3,
+        headerToolbar: {
+          left: "prev,next today",
+          center: "title",
+          right: ""
+        },
+        buttonText: {
+          today: "今日"
+        },
         events: this.eventsValue,
         eventClick: (info) => {
+          info.jsEvent.preventDefault()
           window.location.href = info.event.url
         },
         dateClick: (info) => {

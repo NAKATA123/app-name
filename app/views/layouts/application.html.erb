@@ -23,7 +23,6 @@
         <div class="brand">
           <%= link_to root_path, class: "brand-link" do %>
             <%= image_tag "logo.png", alt: "TOHSAKU", class: "brand-logo" %>
-            <span class="brand-name">TOHSAKU</span>
           <% end %>
         </div>
 
@@ -50,7 +49,7 @@
     </header>
   <% end %>
 
-  <main style="max-width:960px; margin:24px auto; padding:0 16px;">
+  <main style="max-width:1200px; margin:24px auto; padding:0 24px;">
     <% if flash[:notice] %>
       <div class="flash flash-notice"><%= flash[:notice] %></div>
     <% end %>

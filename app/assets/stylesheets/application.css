@@ -75,36 +75,33 @@ body {
 /* ===== Status Badge ===== */
 
 .status-badge {
-  display: inline-block;
-  padding: 4px 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
   border-radius: 999px;
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  /* ステッカー風の二重ボーダー */
-  box-shadow: 0 0 0 1.5px #0a1a20;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
 }
 
-.status-badge.reception {
-  background: #ea580c;
-  color: #fff;
-  border: 2px solid #fed7aa;
-  animation: workingPulse 2s ease-in-out infinite;
+.status-badge::before {
+  content: '';
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 
-.status-badge.working {
-  background: #1d4ed8;
-  color: #fff;
-  border: 2px solid #bfdbfe;
-  animation: workingPulse 2s ease-in-out infinite;
-}
+.status-badge.reception { background: #fff7ed; color: #c2410c; border: 1.5px solid #fb923c; }
+.status-badge.reception::before { background: #f97316; }
 
-.status-badge.completed {
-  background: #15803d;
-  color: #fff;
-  border: 2px solid #bbf7d0;
-}
+.status-badge.working { background: #eff6ff; color: #1d4ed8; border: 1.5px solid #60a5fa; animation: workingPulse 2s ease-in-out infinite; }
+.status-badge.working::before { background: #3b82f6; }
+
+.status-badge.completed { background: #f0fdf4; color: #15803d; border: 1.5px solid #4ade80; }
+.status-badge.completed::before { background: #22c55e; }
 
 /* ===== Header ===== */
 
@@ -119,15 +116,15 @@ body {
 .app-header::after {
   content: '';
   display: block;
-  height: 5px;
-  background: repeating-conic-gradient(#1e8a9a 0% 25%, #0a1a20 0% 50%) 0 0 / 10px 10px;
+  height: 12px;
+  background: repeating-conic-gradient(#fff 0% 25%, #111 0% 50%) 0 0 / 12px 12px;
 }
 
 .header-inner {
-  max-width: 960px;
+  max-width: 1200px;
   margin: 0 auto;
   height: 56px;
-  padding: 0 16px;
+  padding: 0 24px;
   display: flex;
   align-items: center;
   background: repeating-linear-gradient(
@@ -251,23 +248,14 @@ body {
   letter-spacing: -0.01em;
 }
 
-.page-title::before {
-  content: '';
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  flex-shrink: 0;
-  background: radial-gradient(circle,
-    #f0f0f0  0%,  #f0f0f0  13%,
-    #e10600  13%, #e10600  38%,
-    #1a1a1a  38%, #1a1a1a  46%,
-    #3a3a3a  46%, #3a3a3a  52%,
-    #1a1a1a  52%, #1a1a1a  100%
-  );
-  box-shadow: 0 3px 8px rgba(0,0,0,0.45), inset 0 1px 2px rgba(255,255,255,0.2);
-  animation: tireSpin 4s linear infinite;
+.page-title--img::before { display: none; }
+
+.title-car-img {
+  width: 52px;
+  height: auto;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.2));
 }
+
 
 .section-title {
   display: inline-flex;
@@ -577,8 +565,8 @@ body {
 
 .shaken-alert {
   background: #fff;
-  border: 1px solid #fbbf24;
-  border-left: 4px solid #f59e0b;
+  border: 1px solid #fca5a5;
+  border-left: 4px solid #ef4444;
   border-radius: 10px;
   padding: 16px 20px;
   margin-bottom: 24px;
@@ -593,14 +581,14 @@ body {
 }
 
 .shaken-alert-icon  { font-size: 16px; }
-.shaken-alert-title { font-weight: 800; font-size: 14px; color: #92400e; flex: 1; }
+.shaken-alert-title { font-weight: 800; font-size: 14px; color: #991b1b; flex: 1; }
 
 .shaken-alert-count {
   font-size: 12px;
   font-weight: 700;
-  background: #fef3c7;
-  color: #92400e;
-  border: 1px solid #fbbf24;
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fca5a5;
   padding: 2px 8px;
   border-radius: 999px;
 }
@@ -739,14 +727,6 @@ body {
   padding: 40px 48px;
 }
 
-.login-deco-car {
-  font-size: 80px;
-  line-height: 1;
-  margin-bottom: 24px;
-  display: block;
-  filter: drop-shadow(0 0 20px rgba(0,210,190,0.4));
-  animation: carRace 3s ease-in-out infinite;
-}
 
 .login-deco-brand {
   font-size: 28px;
@@ -870,7 +850,7 @@ body {
 
 /* ===== Page Layout ===== */
 
-.page-container { max-width: 960px; margin: 0 auto; padding: 24px 16px 48px; }
+.page-container { max-width: 1200px; margin: 0 auto; padding: 24px 24px 48px; }
 
 .page-header {
   display: flex;
@@ -886,6 +866,32 @@ body {
 .page-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 
 .empty-state { text-align: center; padding: 32px 24px; }
+
+
+.login-deco-car {
+  width: 160px;
+  height: auto;
+  margin-bottom: 24px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  filter: drop-shadow(0 0 20px rgba(0,210,190,0.4));
+  animation: carRace 3s ease-in-out infinite;
+}
+
+.login-deco-flag-img {
+  width: 40px;
+  height: auto;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.btn-icon-img {
+  width: 20px;
+  height: auto;
+  margin-left: 8px;
+  vertical-align: middle;
+  filter: brightness(0) invert(1);
+}
 
 /* ===== Tab ===== */
 
@@ -924,6 +930,56 @@ body {
   border-radius: 10px;
   border: 1px solid #e2e8f0;
   box-shadow: 0 1px 2px rgba(0,0,0,0.05), 0 4px 16px rgba(0,0,0,0.05);
+
+  /* FullCalendar カラーカスタマイズ */
+  --fc-border-color: #e2e8f0;
+  --fc-today-bg-color: rgba(0,210,190,0.08);
+  --fc-event-bg-color: #0a1a20;
+  --fc-event-border-color: #1e8a9a;
+  --fc-event-text-color: #fff;
+  --fc-button-bg-color: #0a1a20;
+  --fc-button-border-color: #1e8a9a;
+  --fc-button-text-color: #fff;
+  --fc-button-hover-bg-color: #1e8a9a;
+  --fc-button-hover-border-color: #00d2be;
+  --fc-button-active-bg-color: #1e8a9a;
+  --fc-button-active-border-color: #00d2be;
+  --fc-highlight-color: rgba(0,210,190,0.15);
+}
+
+#calendar .fc-toolbar-title {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+#calendar .fc-day-today .fc-daygrid-day-number {
+  background: #00d2be;
+  color: #0a1a20;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  text-align: center;
+  font-weight: 800;
+  padding: 0;
+}
+
+#calendar .fc-event {
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-left: 3px solid #00d2be;
+}
+
+#calendar .fc-col-header-cell {
+  background: #f8fafc;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 8px 0;
 }
 
 /* ===== Detail Layout ===== */
