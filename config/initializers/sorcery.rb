@@ -44,12 +44,12 @@ Rails.application.config.sorcery.configure do |config|
   # How long in seconds to keep the session alive.
   # Default: `3600`
   #
-  config.session_timeout = 60 * 60 * 5  # 5時間操作なしで自動ログアウト
+  # config.session_timeout =
 
   # Use the last action as the beginning of session timeout.
   # Default: `false`
   #
-  config.session_timeout_from_last_action = true
+  # config.session_timeout_from_last_action =
 
   # Invalidate active sessions. Requires an `invalidate_sessions_before` timestamp column
   # Default: `false`
