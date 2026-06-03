@@ -1,27 +1,25 @@
 class LoanerCarsController < ApplicationController
   before_action :require_login
 
-  # =========================
-  # 一覧ページ（タブ＋カレンダー用）
-  # =========================
+  # 一覧（タブ切り替え＋カレンダー）
   def index
     @loaner_cars = LoanerCar.all.order(created_at: :desc)
 
     today = Time.zone.today
 
-    # 現在貸出中
+    # 貸出中
     @current_rentals = Rental
       .includes(:loaner_car, repair: { car: :customer })
       .where("start_date <= ? AND end_date >= ?", today, today)
       .order(:start_date)
 
-    # これからの貸出
+    # 貸出予定
     @upcoming_rentals = Rental
       .includes(:loaner_car, repair: { car: :customer })
       .where("start_date > ?", today)
       .order(:start_date)
 
-    # カレンダー表示
+    # カレンダー用イベント
     @rentals = Rental.includes(:loaner_car, repair: { car: :customer })
 
     @calendar_events = @rentals.map do |r|
@@ -32,18 +30,14 @@ class LoanerCarsController < ApplicationController
         url: rental_path(r)
       }
     end
-    end
+  end
 
-  # =========================
-  # 新規代車登録フォーム
-  # =========================
+  # 新規登録フォーム
   def new
     @loaner_car = LoanerCar.new
   end
 
-  # =========================
-  # 代車作成
-  # =========================
+  # 登録
   def create
     @loaner_car = LoanerCar.new(loaner_car_params)
     if @loaner_car.save

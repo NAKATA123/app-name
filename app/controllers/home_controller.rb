@@ -11,5 +11,6 @@ class HomeController < ApplicationController
     @available_count = [LoanerCar.count - @loaned_count, 0].max
 
     @today_notice = Notice.find_by(notice_date: today) || Notice.new(notice_date: today)
+    @expiring_cars = Car.expiring_soon.includes(:customer)
   end
 end

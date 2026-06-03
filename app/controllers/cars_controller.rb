@@ -28,8 +28,11 @@ class CarsController < ApplicationController
   def update
     @car = Car.find(params[:id])
     if @car.update(car_params)
-      redirect_to customer_car_path(@car.customer, @car),
-            notice: "車両情報を更新しました"
+      if params[:from] == "dashboard"
+        redirect_to root_path, notice: "車検期限を更新しました"
+      else
+        redirect_to customer_car_path(@car.customer, @car), notice: "車両情報を更新しました"
+      end
     else
       render :edit, status: :unprocessable_entity
     end
@@ -44,6 +47,6 @@ class CarsController < ApplicationController
   private
 
   def car_params
-    params.require(:car).permit(:car_model, :car_number)
+    params.require(:car).permit(:car_model, :car_number, :shaken_expiry_date)
   end
 end

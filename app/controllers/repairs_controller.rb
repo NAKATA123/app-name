@@ -2,10 +2,16 @@ class RepairsController < ApplicationController
   before_action :require_login
 
   def index
-    @repairs = Repair.includes(car: :customer)
-                     .order(created_at: :desc)
-                     .page(params[:page])
-                     .per(15)
+    @status_filter = params[:status].presence
+    @counts = {
+      all:       Repair.count,
+      reception: Repair.reception.count,
+      working:   Repair.working.count,
+      completed: Repair.completed.count
+    }
+    @repairs = Repair.includes(car: :customer).order(created_at: :desc)
+    @repairs = @repairs.where(status: @status_filter) if @status_filter
+    @repairs = @repairs.page(params[:page]).per(15)
   end
 
   def show
@@ -39,6 +45,12 @@ class RepairsController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def update_status
+    @repair = Repair.find(params[:id])
+    @repair.update!(status: params[:status])
+    redirect_back_or_to repairs_path, notice: "ステータスを更新しました"
   end
 
   def destroy

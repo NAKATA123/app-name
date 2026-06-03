@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   delete "logout", to: "sessions#destroy"
   resources :customers do
     resources :cars do
-      resources :repairs, shallow: true
+      resources :repairs, shallow: true do
+        member do
+          patch :update_status
+        end
+      end
     end
   end
 

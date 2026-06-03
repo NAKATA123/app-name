@@ -10,6 +10,7 @@
   <div class="card">
 
     <%= form_with model: [@car.customer, @car] do |f| %>
+      <%= hidden_field_tag :from, params[:from] %>
 
       <div>
         <%= f.label :car_model, "車種", class: "form-label" %>
@@ -21,7 +22,12 @@
         <%= f.text_field :car_number, class: "form-input" %>
       </div>
 
-      <div style="margin-top: 20px;">
+      <div>
+        <%= f.label :shaken_expiry_date, "車検期限", class: "form-label" %>
+        <%= f.date_field :shaken_expiry_date, class: "form-input" %>
+      </div>
+
+      <div class="form-actions">
         <%= f.submit "更新する", class: "btn-primary" %>
       </div>
 

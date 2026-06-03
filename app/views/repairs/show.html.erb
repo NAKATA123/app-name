@@ -1,17 +1,23 @@
 <h1 class="page-title">修理詳細</h1>
 
-<div class="card" style="margin-bottom:20px;">
+<div class="card card-mb">
   <p><strong>顧客名:</strong> <%= @repair.car.customer.name %></p>
   <p>
     <strong>車両:</strong>
     <%= @repair.car.car_model %>（<%= @repair.car.car_number %>）
   </p>
-
-  <p style="margin-top:12px;">
+  <p class="repair-status-row">
     <strong>ステータス:</strong>
     <span class="status-badge <%= @repair.status %>">
       <%= @repair.status_jp %>
     </span>
+    <% if @repair.next_status %>
+      <%= button_to @repair.next_status_label,
+            update_status_repair_path(@repair),
+            method: :patch,
+            params: { status: @repair.next_status },
+            class: "btn-status-next btn-status-#{@repair.next_status} btn-status-lg" %>
+    <% end %>
   </p>
 </div>
 
@@ -19,10 +25,9 @@
   <p><strong>修理内容</strong></p>
   <p style="white-space: pre-wrap;"><%= @repair.description %></p>
 
-  <div style="margin-top:20px;">
+  <div class="form-actions">
     <%= link_to "代車を貸す", new_rental_path(repair_id: @repair.id), class: "btn-primary" %>
     <%= link_to "編集", edit_repair_path(@repair), class: "btn-outline" %>
-
     <%= link_to "削除", repair_path(@repair),
       data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
       class: "btn-danger" %>
