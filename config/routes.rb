@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   resources :rentals, only: [:new, :create, :show]
 
-  resources :users, only: [:new, :create]
+  resources :users, only: [:index, :new, :create, :destroy]
 
   resources :notices, only: [:create, :update]
 end

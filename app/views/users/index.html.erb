@@ -1,0 +1,48 @@
+<div class="page-container">
+
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">ユーザー管理</h1>
+      <p class="muted">スタッフアカウントの追加・削除ができます。</p>
+    </div>
+    <div class="page-actions">
+      <%= link_to "＋ユーザー追加", new_user_path, class: "btn-primary" %>
+    </div>
+  </div>
+
+  <table class="repair-table">
+    <thead>
+      <tr>
+        <th>メールアドレス</th>
+        <th>権限</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.email %></td>
+          <td>
+            <% if user.admin? %>
+              <span class="status-badge working">管理者</span>
+            <% else %>
+              <span class="status-badge">従業員</span>
+            <% end %>
+          </td>
+          <td>
+            <% if user != current_user %>
+              <%= button_to "削除",
+                    user_path(user),
+                    method: :delete,
+                    data: { turbo_confirm: "#{user.email} を削除しますか？" },
+                    class: "btn-danger" %>
+            <% else %>
+              <span class="muted">（自分）</span>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</div>
