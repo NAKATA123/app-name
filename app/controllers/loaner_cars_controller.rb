@@ -7,7 +7,7 @@ class LoanerCarsController < ApplicationController
   def index
     @loaner_cars = LoanerCar.all.order(created_at: :desc)
 
-    today = Date.today
+    today = Time.zone.today
 
     # 現在貸出中
     @current_rentals = Rental

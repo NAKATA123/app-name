@@ -24,7 +24,7 @@ class RepairsController < ApplicationController
     if @repair.save
       redirect_to repair_path(@repair), notice: "修理を登録しました"
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
