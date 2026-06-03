@@ -25,8 +25,10 @@
       <thead>
         <tr>
           <th>名前</th>
-          <th>電話番号</th>
-          <th>メール</th>
+          <% if current_user.admin? %>
+            <th>電話番号</th>
+            <th>メール</th>
+          <% end %>
         </tr>
       </thead>
 
@@ -38,8 +40,10 @@
                 <span><%= customer.name %></span>
               <% end %>
             </td>
-            <td><%= customer.phone.presence || "-" %></td>
-            <td><%= customer.email.presence || "-" %></td>
+            <% if current_user.admin? %>
+              <td><%= customer.phone.presence || "-" %></td>
+              <td><%= customer.email.presence || "-" %></td>
+            <% end %>
           </tr>
         <% end %>
       </tbody>

@@ -21,15 +21,17 @@
         <p class="detail-value"><%= @customer.name %></p>
       </div>
 
-      <div class="detail-row">
-        <p class="detail-label">電話番号</p>
-        <p class="detail-value"><%= @customer.phone.presence || "未登録" %></p>
-      </div>
+      <% if current_user.admin? %>
+        <div class="detail-row">
+          <p class="detail-label">電話番号</p>
+          <p class="detail-value"><%= @customer.phone.presence || "未登録" %></p>
+        </div>
 
-      <div class="detail-row">
-        <p class="detail-label">メール</p>
-        <p class="detail-value"><%= @customer.email.presence || "未登録" %></p>
-      </div>
+        <div class="detail-row">
+          <p class="detail-label">メール</p>
+          <p class="detail-value"><%= @customer.email.presence || "未登録" %></p>
+        </div>
+      <% end %>
 
       <div class="detail-row">
         <p class="detail-label">メモ</p>
