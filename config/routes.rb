@@ -4,8 +4,6 @@ Rails.application.routes.draw do
   get    "login",  to: "sessions#new"
   post   "login",  to: "sessions#create"
   delete "logout", to: "sessions#destroy"
-  get "rentals/calendar", to: "rentals#calendar"
-
   resources :customers do
     resources :cars do
       resources :repairs, shallow: true

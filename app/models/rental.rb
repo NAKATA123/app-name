@@ -2,9 +2,17 @@ class Rental < ApplicationRecord
   belongs_to :loaner_car
   belongs_to :repair, optional: true
 
+  validates :start_date, presence: true
+  validates :end_date, presence: true
+  validate :end_date_after_start_date
   validate :no_double_booking
 
   private
+
+  def end_date_after_start_date
+    return unless start_date && end_date
+    errors.add(:end_date, "は開始日以降の日付を選択してください") if end_date < start_date
+  end
 
   def no_double_booking
     return unless start_date && end_date

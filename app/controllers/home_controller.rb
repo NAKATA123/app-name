@@ -1,10 +1,7 @@
 class HomeController < ApplicationController
-  def top
-    unless logged_in?
-      redirect_to login_path, alert: "ログインしてください"
-      return
-    end
+  before_action :require_login
 
+  def top
     @reception_count = Repair.reception.count
     @working_count   = Repair.working.count
     @completed_count = Repair.completed.count

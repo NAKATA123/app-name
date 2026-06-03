@@ -1,4 +1,6 @@
 class RepairsController < ApplicationController
+  before_action :require_login
+
   def index
     @repairs = Repair.includes(car: :customer)
                      .order(created_at: :desc)

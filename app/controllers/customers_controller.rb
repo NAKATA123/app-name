@@ -41,7 +41,7 @@ class CustomersController < ApplicationController
   def destroy
     @customer = Customer.find(params[:id])
     @customer.destroy
-    redirect_to custoemers_path, notice: "顧客を削除しました"
+    redirect_to customers_path, notice: "顧客を削除しました"
   end
 
   private

@@ -12,7 +12,7 @@
     const events = [
       <% @rentals.each do |rental| %>
         {
-          title: "<%= rental.loaner_car.name %> / <%= rental.repair.car.customer.name %>",
+          title: "<%= j "#{rental.loaner_car.name} / #{rental.repair&.car&.customer&.name}" %>",
           start: "<%= rental.start_date %>",
           end: "<%= rental.end_date %>"
         },
