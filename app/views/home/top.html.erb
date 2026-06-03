@@ -1,9 +1,14 @@
 <h1 class="page-title">ダッシュボード</h1>
 
 <div class="card" style="margin-bottom:24px;">
+  <% today = Time.zone.today %>
+  <% days_jp = %w[日 月 火 水 木 金 土] %>
   <p class="muted" style="margin:0;">本日</p>
   <p style="margin:6px 0 0; font-weight:800; font-size:16px;">
-    <%= Time.zone.today.strftime("%Y/%m/%d") %>
+    <%= today.strftime("%Y/%m/%d") %>
+    <span style="font-size:13px; color:#64748b; margin-left:4px;">
+      （<%= days_jp[today.wday] %>）
+    </span>
   </p>
 
   <div class="today-notice"
