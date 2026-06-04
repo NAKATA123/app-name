@@ -15,6 +15,7 @@
           edit_customer_car_path(@car.customer, @car),
           class: "btn-outline" %>
 
+      <%= link_to "顧客詳細へ戻る", customer_path(@car.customer), class: "btn-outline" %>
       <%= link_to "削除",
           customer_car_path(@car.customer, @car),
           class: "btn-danger",

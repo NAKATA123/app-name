@@ -28,6 +28,7 @@
   <div class="form-actions">
     <%= link_to "代車を貸す", new_rental_path(repair_id: @repair.id), class: "btn-primary" %>
     <%= link_to "編集", edit_repair_path(@repair), class: "btn-outline" %>
+    <%= link_to "一覧へ戻る", repairs_path, class: "btn-outline" %>
     <%= link_to "削除", repair_path(@repair),
       data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
       class: "btn-danger" %>

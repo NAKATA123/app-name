@@ -24,8 +24,9 @@
         class: "form-select" %>
     </div>
 
-    <div style="margin-top:20px;">
+    <div class="form-actions">
       <%= f.submit "更新する", class: "btn-primary" %>
+      <%= link_to "戻る", repair_path(@repair), class: "btn-outline" %>
     </div>
 
   <% end %>
