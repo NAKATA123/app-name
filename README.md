@@ -10,7 +10,17 @@ https://app-name-eris.onrender.com
 メールアドレス | demo@example.com |
 パスワード | demo1234 |
 
-ローカル環境では `docker compose exec web rails db:seed` を実行するとデモアカウントが作成されます。
+## ローカル環境での起動手順
+
+```bash
+# コンテナ起動
+docker compose up
+
+# 初回のみ：DB作成・マイグレーション・シードデータ投入
+docker compose exec web rails db:create db:migrate db:seed
+```
+
+起動後、http://localhost:3000 でアクセスできます。
 
 
 ## このサービスへの思い・作りたい理由
@@ -63,7 +73,19 @@ MVPリリース時
 ステータスごとの色分け表示などUI改善
 権限管理（管理者 / スタッフ）
 簡易的なメモ・備考欄機能
- 
+
+
+本リリース後の追加機能
+
+修理の受付日・完了日の管理
+車検期限の管理・期限アラート表示（顧客の車・代車）
+代車のカレンダー表示
+ダッシュボードの修理・代車状況サマリー
+今日の連絡事項メモ
+パスワード変更
+代車の重複予約バリデーション
+
+
 ## 使用する技術スタック
 フレームワーク：Ruby on Rails
 
