@@ -9,7 +9,7 @@
   <p class="repair-status-row">
     <strong>ステータス:</strong>
     <span class="status-badge <%= @repair.status %>">
-      <%= @repair.status_jp %>
+      <%= t("enums.repair.status.#{@repair.status}") %>
     </span>
     <% if @repair.next_status %>
       <%= button_to @repair.next_status_label,
