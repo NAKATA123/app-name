@@ -3,6 +3,7 @@ class CarsController < ApplicationController
 
   def show
     @car = Car.find(params[:id])
+    @repairs = @car.repairs.order(created_at: :desc)
   end
 
   def new

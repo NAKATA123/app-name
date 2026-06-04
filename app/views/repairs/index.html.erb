@@ -34,6 +34,7 @@
   <table class="repair-table">
     <thead>
       <tr>
+        <th>受付日</th>
         <th>顧客名</th>
         <th>車両</th>
         <th>修理内容</th>
@@ -45,6 +46,7 @@
     <tbody>
       <% @repairs.each do |repair| %>
         <tr>
+          <td><%= repair.received_at&.strftime("%Y/%m/%d") || "-" %></td>
           <td><%= repair.car.customer.name %></td>
           <td>
             <%= repair.car.car_model %>
