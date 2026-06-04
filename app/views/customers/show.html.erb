@@ -82,7 +82,7 @@
   <div class="section-block">
     <h2 class="section-title">修理一覧</h2>
 
-    <% if @customer.repairs.any? %>
+    <% if @repairs.any? %>
       <table class="repair-table">
         <thead>
           <tr>
@@ -92,7 +92,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @customer.repairs.each do |repair| %>
+          <% @repairs.each do |repair| %>
             <tr class="table-row-link" onclick="location.href='<%= repair_path(repair) %>'">
               <td><%= repair.car.car_model %></td>
               <td><%= repair.car.car_number %></td>

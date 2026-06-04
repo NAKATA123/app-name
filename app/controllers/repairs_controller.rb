@@ -20,7 +20,7 @@ class RepairsController < ApplicationController
 
   def new
     @car = Car.find(params[:car_id])
-    @repair = @car.repairs.build
+    @repair = @car.repairs.build(received_at: Time.zone.today)
   end
 
   def create
@@ -49,7 +49,9 @@ class RepairsController < ApplicationController
 
   def update_status
     @repair = Repair.find(params[:id])
-    @repair.update!(status: params[:status])
+    attrs = { status: params[:status] }
+    attrs[:completed_at] = Time.zone.today if params[:status] == "completed" && @repair.completed_at.nil?
+    @repair.update!(attrs)
     redirect_back_or_to repairs_path, notice: "ステータスを更新しました"
   end
 
@@ -59,11 +61,9 @@ class RepairsController < ApplicationController
     redirect_to repairs_path, notice: "修理を削除しました"
   end
 
-
-
   private
 
   def repair_params
-    params.require(:repair).permit(:description, :status)
+    params.require(:repair).permit(:description, :status, :received_at, :completed_at)
   end
 end

@@ -1040,6 +1040,71 @@ body {
 
 .cell-link-anchor:hover { color: #0a6e78; }
 
+/* ===== Pagination ===== */
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.pagination span,
+.pagination a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 10px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.15s;
+}
+
+.pagination a {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+}
+
+.pagination a:hover {
+  border-color: #94a3b8;
+  color: #1e293b;
+  background: #f8fafc;
+}
+
+.pagination .current {
+  background: linear-gradient(135deg, #6366f1, #3b82f6);
+  color: #fff;
+  border: none;
+  box-shadow: 0 2px 6px rgba(99,102,241,0.35);
+}
+
+.pagination .gap {
+  color: #94a3b8;
+  border: none;
+  background: transparent;
+}
+
+.pagination .prev a,
+.pagination .next a,
+.pagination .first a,
+.pagination .last a {
+  color: #0e8a9a;
+  border-color: #1e8a9a;
+}
+
+.pagination .prev a:hover,
+.pagination .next a:hover,
+.pagination .first a:hover,
+.pagination .last a:hover {
+  background: #f0f9fa;
+}
+
 /* ===== Mobile ===== */
 
 @media (max-width: 640px) {

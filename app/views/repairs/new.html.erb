@@ -26,6 +26,11 @@
         class: "form-select" %>
     </div>
 
+    <div>
+      <%= f.label :received_at, "受付日", class: "form-label" %>
+      <%= f.date_field :received_at, class: "form-input" %>
+    </div>
+
     <div style="margin-top:20px;">
       <%= f.submit "登録", class: "btn-primary" %>
     </div>

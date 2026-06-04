@@ -22,6 +22,10 @@
 </div>
 
 <div class="card">
+  <p><strong>受付日:</strong> <%= @repair.received_at&.strftime("%Y/%m/%d") || "未登録" %></p>
+  <% if @repair.completed_at %>
+    <p><strong>完了日:</strong> <%= @repair.completed_at.strftime("%Y/%m/%d") %></p>
+  <% end %>
   <p><strong>修理内容</strong></p>
   <p style="white-space: pre-wrap;"><%= @repair.description %></p>
 
