@@ -40,6 +40,12 @@ class RentalsController < ApplicationController
                     .find(params[:id])
   end
 
+  def destroy
+    rental = Rental.find(params[:id])
+    rental.destroy
+    redirect_to loaner_cars_path, notice: "貸出を削除しました"
+  end
+
   private
 
   def rental_params

@@ -93,7 +93,7 @@
         </thead>
         <tbody>
           <% @customer.repairs.each do |repair| %>
-            <tr>
+            <tr class="table-row-link" onclick="location.href='<%= repair_path(repair) %>'">
               <td><%= repair.car.car_model %></td>
               <td><%= repair.car.car_number %></td>
               <td>

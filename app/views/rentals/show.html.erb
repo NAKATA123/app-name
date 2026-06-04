@@ -29,5 +29,8 @@
 
   <div style="margin-top: 20px;">
     <%= link_to "戻る", loaner_cars_path, class: "btn-outline" %>
+    <%= link_to "削除", rental_path(@rental),
+          data: { turbo_method: :delete, turbo_confirm: "この貸出を削除しますか？" },
+          class: "btn-danger" %>
   </div>
 </div>
