@@ -217,6 +217,15 @@ body {
   border-radius: 4px;
 }
 
+.header-icon-btn {
+  font-size: 16px;
+  opacity: 0.6;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+
+.header-icon-btn:hover { opacity: 1; }
+
 .logout form { margin: 0; }
 
 .logout-btn {
