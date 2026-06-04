@@ -38,10 +38,10 @@
         <% @rentals.each do |rental| %>
           <tr>
             <td><%= rental.loaner_car.name %></td>
-            <td><%= rental.repair.car.customer.name %></td>
+            <td><%= rental.repair&.car&.customer&.name || "顧客情報なし" %></td>
             <td>
-              <%= rental.repair.car.car_model %>
-              （<%= rental.repair.car.car_number %>）
+              <%= rental.repair&.car&.car_model %>
+              （<%= rental.repair&.car&.car_number %>）
             </td>
             <td><%= rental.start_date.strftime("%Y/%m/%d") %></td>
             <td><%= rental.end_date.strftime("%Y/%m/%d") %></td>

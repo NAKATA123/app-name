@@ -49,6 +49,9 @@ class RepairsController < ApplicationController
 
   def update_status
     @repair = Repair.find(params[:id])
+    unless Repair.statuses.key?(params[:status])
+      return redirect_back_or_to repairs_path, alert: "無効なステータスです"
+    end
     attrs = { status: params[:status] }
     attrs[:completed_at] = Time.zone.today if params[:status] == "completed" && @repair.completed_at.nil?
     @repair.update!(attrs)

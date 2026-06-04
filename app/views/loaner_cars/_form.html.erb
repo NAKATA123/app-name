@@ -1,0 +1,26 @@
+<%= form_with model: @loaner_car, local: true do |f| %>
+  <div>
+    <%= f.label :name, "代車名", class: "form-label" %>
+    <%= f.text_field :name, class: "form-input" %>
+  </div>
+
+  <div>
+    <%= f.label :car_number, "ナンバー", class: "form-label" %>
+    <%= f.text_field :car_number, class: "form-input" %>
+  </div>
+
+  <div>
+    <%= f.label :shaken_expiry_date, "車検期限", class: "form-label" %>
+    <%= f.date_field :shaken_expiry_date, class: "form-input" %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit @loaner_car.new_record? ? "登録する" : "更新する", class: "btn-primary" %>
+    <%= link_to "戻る", loaner_cars_path, class: "btn-outline" %>
+    <% unless @loaner_car.new_record? %>
+      <%= link_to "削除", loaner_car_path(@loaner_car),
+            data: { turbo_method: :delete, turbo_confirm: "#{@loaner_car.name}を削除しますか？" },
+            class: "btn-danger" %>
+    <% end %>
+  </div>
+<% end %>
